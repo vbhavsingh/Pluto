@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+    <tlib-version>1.0</tlib-version>
+    <short-name>d</short-name>
+    <uri>http://www.decorator.tags</uri>
+
+    <function>
+        <name>spCheck</name>
+        <function-class>com.log.server.util.TagUtils</function-class>
+        <function-signature>
+            java.lang.String spCheck(int,java.lang.String)
+        </function-signature>
+    </function>
+    
+    <function>
+        <name>labels</name>
+        <function-class>com.log.server.util.TagUtils</function-class>
+        <function-signature>
+            java.lang.String labels()
+        </function-signature>
+    </function>
+    
+    <function>
+        <name>labelsArray</name>
+        <function-class>com.log.server.util.TagUtils</function-class>
+        <function-signature>
+            java.lang.String labelsArray()
+        </function-signature>
+    </function>    
+    
+    <function>
+        <name>highlight</name>
+        <function-class>com.log.server.util.TagUtils</function-class>
+        <function-signature>
+            java.lang.String highlightSearch(java.lang.String,com.log.server.model.ViewResultModel)
+        </function-signature>
+    </function>
+    
+    <function>
+        <name>shortFilePath</name>
+        <function-class>com.log.server.util.TagUtils</function-class>
+        <function-signature>
+            java.lang.String shortFilePathName(java.lang.String)
+        </function-signature>
+    </function>
+    
+    <function>
+        <name>shortNodeName</name>
+        <function-class>com.log.server.util.TagUtils</function-class>
+        <function-signature>
+            java.lang.String shortNodeName(java.lang.String)
+        </function-signature>
+    </function>
+    
+    <function>
+        <name>resultMessage</name>
+        <function-class>com.log.server.util.TagUtils</function-class>
+        <function-signature>
+            java.lang.String resultMessage(com.log.server.model.ViewResultModel)
+        </function-signature>
+    </function>
+    
+    <function>
+        <name>groupMatched</name>
+        <function-class>com.log.server.util.TagUtils</function-class>
+        <function-signature>
+            boolean groupMatched(java.lang.String,java.util.List)
+        </function-signature>
+    </function>
+    
+    <function>
+        <name>previousSearchCriterias</name>
+        <function-class>com.log.server.util.TagUtils</function-class>
+        <function-signature>
+            java.lang.String previousSearchCriterias(java.lang.String)
+        </function-signature>
+    </function>
+    
+  
+</taglib>

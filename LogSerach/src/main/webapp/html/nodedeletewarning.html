@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style type="text/css">
+._warning_button_keep {
+	background: #3E3838;
+	-webkit-border-radius: 4;
+	-moz-border-radius: 4;
+	border-radius: 4px;
+	font-family: Arial;
+	color: #FFFFFF;
+	font-size: 16px;
+	border: solid #D6D6D6 1px;
+	text-decoration: none;
+}
+
+._warning_button_keep:hover {
+	background: #0B610B;
+}
+
+._warning_button_delete {
+	background: #3E3838;
+	-webkit-border-radius: 4;
+	-moz-border-radius: 4;
+	border-radius: 4px;
+	font-family: Arial;
+	color: #FFFFFF;
+	font-size: 16px;
+	border: solid #D6D6D6 1px;
+	text-decoration: none;
+}
+
+._warning_button_delete:hover {
+	background: #B40404;
+}
+</style>
+</head>
+<body>
+	<div  ng-show="msg_warning">
+		<div style="font-size: 14px;">
+			<p>You are about to delete agent running on {{nodename}}.</p>
+			<p>Once you select to delete, following would be performed.</p>
+			<ul>
+				<li>Remote agent on {{nodename}} will be terminated.</li>
+				<li>Agent configuration and mappings will be permanently
+					removed from system.</li>
+			</ul>
+			<p>However if you start agent of {{nodename}}, it will
+				automatically register itself back with appropriate user mappings.
+				It will not however create Label mappings.</p>
+		</div>
+		<div>
+			<input ng-click="closeThisDialog()" class="_warning_button_keep"
+				style="width: 130px;" id="cancelDelete" type="submit"
+				value="Keep It"> 
+				<input ng-click="deletenode(nodename,index_node)"
+				class="_warning_button_delete" style="width: 130px;" id="deleteNode"
+				type="submit" value="Delete It">
+		</div>
+	</div>
+	<div ng-show="msg_confirmation">
+		<div>
+			<p>Agent on node {{nodename}} is terminated !</p>
+			<p ng-show="msg_sub_agentdown">However remote agent on node {{nodename}} was not reachable, it may be already down.</p>
+			<p>All the mappings and configuration related to this node are removed permanently.</p>
+			<p>However if you restart agent on {{nodename}}, it will
+				automatically register itself back with appropriate user mappings.</p>
+		</div>
+	</div>
+	<div  ng-show="msg_failed">
+		<p>Agent cannot be deleted !</p>
+		<p>{{msg_serverresponse}}</p>
+	</div>
+</body>
+</html>
