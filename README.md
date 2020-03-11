@@ -1,4 +1,4 @@
-# Pluto
+# Pluto <Need Help to make it grow>
 log search tool, aggregation, sorting by date
 
 Introduction
