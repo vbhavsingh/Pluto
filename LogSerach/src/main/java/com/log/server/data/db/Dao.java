@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.log.analyzer.commons.Constants;
@@ -48,6 +49,7 @@ import net.rationalminds.es.EnvironmentalControl;
  * @author Vaibhav Pratap Singh
  */
 @Transactional
+@Component
 public class Dao {
 
 	private static final Logger Log = LoggerFactory.getLogger(Dao.class);

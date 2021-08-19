@@ -11,9 +11,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
 import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,11 +27,10 @@ import com.log.server.biz.CommonServices;
  *
  * @author Vaibhav Singh
  */
-public class ApplicationLifecycleListener implements ServletContextListener, HttpSessionListener {
+public class ApplicationLifecycleListener {
 
     private final static Logger Log = LoggerFactory.getLogger(ApplicationLifecycleListener.class);
 
-    @Override
     public void contextInitialized(ServletContextEvent sce) {
     	// set the log level if present in arguments
     	if(Util.isValidLogLevel(System.getProperty(Constants.LOG_LEVEL))){
@@ -56,14 +53,14 @@ public class ApplicationLifecycleListener implements ServletContextListener, Htt
         	}
         }
         try {
-			CommonServices.initializedDatabse();
+        	//TODO MOVE
+			//CommonServices.initializedDatabse();
 		} catch (Exception e) {
 			Log.error("db cannot be initialized, application exiting",e);
 			System.exit(100);
 		}
     }
 
-    @Override
     public void contextDestroyed(ServletContextEvent sce) {
         Log.info("destroying executor pool");
         List<Runnable> tasks = LocalConstants.executor.shutdownNow();
@@ -73,12 +70,10 @@ public class ApplicationLifecycleListener implements ServletContextListener, Htt
         Log.info("executor pool destroyed, aborting {} task/s that were under progress", tasks.size());
     }
 
-    @Override
     public void sessionCreated(HttpSessionEvent se) {
         //do nothing
     }
 
-    @Override
     public void sessionDestroyed(HttpSessionEvent se) {
         //do nothing
     }

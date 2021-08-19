@@ -1,7 +1,8 @@
 package com.log.server.model;
 
+import javax.validation.constraints.NotEmpty;
+
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.hibernate.validator.constraints.NotEmpty;
 
 public class AgentLabelMapModel {
 	@NotEmpty

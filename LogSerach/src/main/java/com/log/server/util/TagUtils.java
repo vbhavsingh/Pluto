@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.jsp.tagext.TagSupport;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.util.HtmlUtils;
 
 import com.log.server.biz.CommonServices;
@@ -25,6 +26,9 @@ import com.log.server.model.ViewResultModel;
  */
 public class TagUtils extends TagSupport {
 
+	@Autowired
+	private CommonServices commonServices;
+	
     /**
      *
      * @param i
@@ -93,8 +97,8 @@ public class TagUtils extends TagSupport {
     *
     * @return
     */
-   public static String previousSearchCriterias(String fieldName) {
-       List<String> suggestions = CommonServices.getPreviousSearchCriterias(fieldName);
+   public String previousSearchCriterias(String fieldName) {
+       List<String> suggestions = commonServices.getPreviousSearchCriterias(fieldName);
        if (suggestions == null || suggestions.size() == 0) {
            return null;
        }
@@ -116,8 +120,8 @@ public class TagUtils extends TagSupport {
      *
      * @return
      */
-    public static String labels() {
-        List<LabelCounter> labelList = CommonServices.getLabelListWithNodeCounter();
+    public String labels() {
+        List<LabelCounter> labelList = commonServices.getLabelListWithNodeCounter();
         if (labelList == null || labelList.size() == 0) {
             return null;
         }
@@ -137,8 +141,8 @@ public class TagUtils extends TagSupport {
     *
     * @return
     */
-   public static String labelsArray() {
-       List<LabelCounter> labelList = CommonServices.getLabelListWithNodeCounter();
+   public String labelsArray() {
+       List<LabelCounter> labelList = commonServices.getLabelListWithNodeCounter();
        if (labelList == null || labelList.size() == 0) {
            return null;
        }

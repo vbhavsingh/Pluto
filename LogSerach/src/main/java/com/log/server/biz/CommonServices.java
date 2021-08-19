@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.log.server.SpringHelper;
 import com.log.server.data.db.Dao;
@@ -19,19 +21,24 @@ import com.log.server.model.SearchPageModel;
  *
  * @author Vaibhav Pratap Singh
  */
+@Component
 public class CommonServices {
 
 	private final static Logger Log = LoggerFactory.getLogger(CommonServices.class);
+	
+	@Autowired
+	private Dao dao;
+	
+	@Autowired
+	private AdminServices adminServices;
 
-	public static SearchPageModel getSearchPageModel() {
-		Dao dao = SpringHelper.getDao();
+	public SearchPageModel getSearchPageModel() {
 		SearchPageModel model = new SearchPageModel();
 		model.setLabelList(dao.getLabels());
 		return model;
 	}
 	
-	public static List<String> getSearchHelpKeywords() {
-		Dao dao = SpringHelper.getDao();
+	public List<String> getSearchHelpKeywords() {
 		if (dao == null) {
 			Log.debug("database bean not created, returning no labels to user");
 			return null;
@@ -39,8 +46,7 @@ public class CommonServices {
 		return dao.getLabels();
 	}
 	
-	public static List<String> getLabelList() {
-		Dao dao = SpringHelper.getDao();
+	public List<String> getLabelList() {
 		if (dao == null) {
 			Log.debug("database bean not created, returning no labels to user");
 			return null;
@@ -48,8 +54,7 @@ public class CommonServices {
 		return dao.getLabels();
 	}
 
-	public static List<LabelCounter> getLabelListWithNodeCounter() {
-		Dao dao = SpringHelper.getDao();
+	public List<LabelCounter> getLabelListWithNodeCounter() {
 		if (dao == null) {
 			Log.debug("database bean not created, returning no labels to user");
 			return null;
@@ -57,8 +62,7 @@ public class CommonServices {
 		return dao.getLabelNodeCounter();
 	}
 	
-	public static List<String> getPreviousSearchCriterias(String fieldName) {
-		Dao dao = SpringHelper.getDao();
+	public List<String> getPreviousSearchCriterias(String fieldName) {
 		if (dao == null) {
 			Log.debug("database bean not created, returning no labels to user");
 			return null;
@@ -66,12 +70,8 @@ public class CommonServices {
 		return dao.getPreviousSearchCriterias(fieldName);
 	}
 
-	public static void initializedDatabse() throws Exception {
-		AdminServices svc = (AdminServices) SpringHelper.getBean("AdminServices");
-		if (svc == null) {
-			Log.debug("database bean not created, cannot initialize tables");
-		}
-		svc.initializeDataBase();
+	public void initializedDatabse() throws Exception {
+		adminServices.initializeDataBase();
 	}
 
 	/**
@@ -79,8 +79,7 @@ public class CommonServices {
 	 * @param userName
 	 * @param nodeName
 	 */
-	public static int deleteUserNodeMapping(String userName, String nodeName) {
-		Dao dao = SpringHelper.getDao();
+	public int deleteUserNodeMapping(String userName, String nodeName) {
 		if (dao == null) {
 			Log.debug("database bean not created, cannot initialize tables");
 		}

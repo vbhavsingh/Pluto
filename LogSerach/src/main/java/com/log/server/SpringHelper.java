@@ -27,7 +27,7 @@ public class SpringHelper {
     private SpringHelper() {
     }
 
-    public static SpringHelper getHelper() {
+    public static SpringHelper _getHelper() {
         if (springHelper == null) {
             springHelper = new SpringHelper();
         }
@@ -48,17 +48,17 @@ public class SpringHelper {
         }
     }
 
-    public static Object getBean(String bean) {
+    public static Object _getBean(String bean) {
         Log.trace("Creating bean " + bean);
         return (Object) context.getBean(bean);
     }
 
-    public static Dao getDao() {
+    public static Dao _getDao() {
         Log.trace("Creating data access bean ");
         return (Dao) context.getBean("Dao");
     }
     
-	public static SearchBiz searchBean() {
+	public static SearchBiz _searchBean() {
 		return (SearchBiz) context.getBean("SearchBiz");
 	}
 

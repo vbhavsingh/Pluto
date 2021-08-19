@@ -12,6 +12,7 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -22,10 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.log.analyzer.commons.Constants;
 import com.log.analyzer.commons.model.AgentTerminatorRequestModel;
 import com.log.server.LocalConstants;
-import com.log.server.SpringHelper;
 import com.log.server.biz.AdminServices;
 import com.log.server.model.AddEditUserModel;
 import com.log.server.model.AgentLabelMapModel;
@@ -43,7 +42,9 @@ import net.rationalminds.es.EnvironmentalControl;
 @Controller
 public class Registration {
 	private static final Logger Log = LoggerFactory.getLogger(Registration.class);
-	private AdminServices svc = (AdminServices) SpringHelper.getBean("AdminServices");
+	
+	@Autowired
+	private AdminServices svc;
 
 	@RequestMapping(value = "/secure/adduserview.htm")
 	@PreAuthorize("hasAuthority('"+LocalConstants.ROLE.ADMIN+"') or hasAuthority('"+LocalConstants.ROLE.GROUP_ADMIN+"')")

@@ -5,17 +5,14 @@
  */
 package com.log.server.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -25,11 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.log.analyzer.commons.Constants;
 import com.log.analyzer.commons.model.FileLineRequestModel;
-import com.log.server.SpringHelper;
 import com.log.server.biz.CachingService;
 import com.log.server.biz.CommonServices;
+import com.log.server.biz.SearchBiz;
 import com.log.server.model.FileLineServerResultModel;
-import com.log.server.model.LogRecordModel;
 import com.log.server.model.ScrollableResultModel;
 import com.log.server.model.SearchInput;
 import com.log.server.model.ViewResultModel;
@@ -42,6 +38,12 @@ import com.log.server.model.ViewResultModel;
 public class Search {
 
 	private final static Logger Log = LoggerFactory.getLogger(Search.class);
+	
+	@Autowired
+	private SearchBiz searchBiz;
+	
+	@Autowired
+	private CommonServices commonServices;
 	
 	@RequestMapping(value = "/version.htm", produces=MediaType.TEXT_PLAIN)
 	public String version(){
@@ -128,7 +130,7 @@ public class Search {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		input.setSessionId(request.getSession().getId());
 		input.setUserName(auth.getName());
-		return SpringHelper.searchBean().getLinesInRangeFromFile(input);
+		return searchBiz.getLinesInRangeFromFile(input);
 	}
 
 	/**
@@ -145,6 +147,6 @@ public class Search {
 	@RequestMapping(value = "/labels.htm", produces = MediaType.APPLICATION_JSON)
 	@ResponseBody
 	public List<String> getLabels() {
-		return CommonServices.getLabelList();
+		return commonServices.getLabelList();
 	}
 }

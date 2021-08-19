@@ -7,6 +7,7 @@ package com.log.server.concurrent;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.log.server.biz.CommonServices;
 
@@ -20,6 +21,9 @@ public class UserNodeCorrection implements Runnable {
 
     private String nodeName;
     private String userName;
+    
+    @Autowired
+    private CommonServices commonServices;
 
     public UserNodeCorrection(String userName, String nodeName) {
         this.nodeName = nodeName;
@@ -29,7 +33,7 @@ public class UserNodeCorrection implements Runnable {
     @Override
     public void run() {
         Log.trace("deleting user role mapping for user: {}  & node: {}", userName, nodeName);
-        int r = CommonServices.deleteUserNodeMapping(userName, nodeName);
+        int r = commonServices.deleteUserNodeMapping(userName, nodeName);
         if (r == 1) {
             Log.info("deleted user role mapping for user: {}  & node: {}", userName, nodeName);
         }
