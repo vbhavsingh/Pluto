@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<b:beans xmlns="http://www.springframework.org/schema/security"
+		 xmlns:b="http://www.springframework.org/schema/beans"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd">
+
+	<b:import resource="classpath*:database-spring.xml" />
+
+	<http pattern="**/css/**" security="none" />
+	<http pattern="**/js/**" security="none" />
+	<http pattern="**/loginpage.html" security="none" />
+	<http pattern="**/img/**" security="none" />
+	<!-- <http pattern="/rs/**" security="none" /> -->
+	
+	<http pattern="/rs/**">
+		<intercept-url pattern="/rs/**" access="hasAuthority('ROBOT')"/> 
+		<http-basic/>
+	</http>
+
+	<http use-expressions="true">
+	
+		<intercept-url pattern="/secure/**" access="isAuthenticated()" />
+
+		<intercept-url pattern="/page.htm" access="isAuthenticated()" />
+		
+		<intercept-url pattern="/getlinesfromfile.htm" access="isAuthenticated()" />
+		
+		<intercept-url pattern="/labels.htm" access="isAuthenticated()" />
+
+		<intercept-url pattern="/next.htm" access="isAuthenticated()" />
+
+		<intercept-url pattern="/search.htm" access="isAuthenticated()" />
+
+		<intercept-url pattern="/res/htm/**" access="isAuthenticated()" />
+
+		<intercept-url pattern="/admin/*.jsp" access="isAuthenticated()" />
+
+		<intercept-url pattern="/admin/views/*.jsp" access="isAuthenticated()" />
+
+		<form-login login-page="/login.htm" authentication-failure-url="/login.htm?login_error=1" default-target-url="/application.htm" />
+
+		<csrf disabled="true" />
+
+		<logout logout-url="/j_spring_security_logout" delete-cookies="JSESSIONID" logout-success-url="/login.htm?login_error=2" invalidate-session="false"/>
+
+		<session-management invalid-session-url="/login.htm?login_error=3" session-fixation-protection="migrateSession">
+			<concurrency-control max-sessions="1" expired-url="/login.htm?login_error=5"/>
+		</session-management>
+
+	</http>
+
+	<b:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+<!--     	<constructor-arg name="strength" value="10" />
+	</bean> -->
+
+	<b:bean id="dbAuthentication" class="com.security.common.DbAuthenticationService"/>
+
+	<b:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<b:property name="userDetailsService" ref="dbAuthentication" />
+		<b:property name="passwordEncoder" ref="encoder" />
+	</b:bean>
+
+
+	<authentication-manager>
+		<authentication-provider user-service-ref="dbAuthentication" />
+	</authentication-manager>
+</b:beans>

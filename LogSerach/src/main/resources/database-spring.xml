@@ -11,8 +11,6 @@
        http://www.springframework.org/schema/jdbc 
        http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
 
-       
-
 	<!-- <bean id="hsqlDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" > <property name="driverClassName" value="org.hsqldb.jdbc.JDBCDriver"/> <property 
 		name="url" value="jdbc:hsqldb:file:db/configuration;shutdown=true"/> <property name="username" value=""/> <property name="password" value=""/> </bean> -->
 
@@ -36,18 +34,8 @@
 	
 	<tx:annotation-driven proxy-target-class="true" transaction-manager="txManager" />
 	
-	<bean id="txManager"
-        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="hsqlDataSource" />
     </bean>
-
-	<bean id="Dao" class="com.log.server.data.db.Dao">
-		<property name="dataSource" ref="hsqlDataSource" />
-	</bean>
-
-	<bean id="AdminServices" class="com.log.server.biz.AdminServices">
-		<property name="dao" ref="Dao" />
-	</bean>
-
 
 </beans>

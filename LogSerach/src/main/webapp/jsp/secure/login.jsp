@@ -2,7 +2,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="d" uri="http://www.decorator.tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib uri="http://htmlcompressor.googlecode.com/taglib/compressor" prefix="compress" %>
 <!DOCTYPE html>
 <html ng-app="security-app">
 <head>

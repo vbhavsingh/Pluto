@@ -6,7 +6,6 @@ import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.log.server.LocalConstants;
-import com.log.server.SpringHelper;
 import com.log.server.model.LogRecordModel;
 import com.log.server.model.ScrollableResultModel;
 import com.log.server.model.SearchInput;

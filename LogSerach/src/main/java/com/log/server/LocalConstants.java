@@ -225,7 +225,7 @@ public class LocalConstants {
     
     public static final class USER_DEFAULTS{
     	public static final String USERNAME="admin";
-    	public static final String PASSWORD="admin";
+    	public static final String PASSWORD="$2a$12$Kqu8z4rEM15vQCjGxIb3ke37Wh35RCbfecN1ZdPTy7BUB66bVKLpK";
     	public static final String CREATED_BY="system";
     	public static final String EMAIL="admin@delete.me";
     	public static final String NAME="Admin";

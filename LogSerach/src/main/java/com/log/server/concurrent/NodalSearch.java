@@ -23,7 +23,6 @@ import com.log.analyzer.commons.model.AgentModel;
 import com.log.analyzer.commons.model.SearchModel;
 import com.log.analyzer.commons.model.SearchResultModel;
 import com.log.server.LocalConstants;
-import com.log.server.SpringHelper;
 import com.log.server.biz.AdminServices;
 import com.log.server.util.Utilities;
 import com.sun.jersey.api.client.Client;

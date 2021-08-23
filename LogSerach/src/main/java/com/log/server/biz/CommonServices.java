@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.log.server.SpringHelper;
 import com.log.server.data.db.Dao;
 import com.log.server.model.LabelCounter;
 import com.log.server.model.SearchPageModel;

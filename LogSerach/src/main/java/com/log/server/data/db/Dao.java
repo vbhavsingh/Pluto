@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.log.server.data.db;
 
 import java.sql.Types;
@@ -10,12 +5,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.log.analyzer.commons.Constants;
@@ -49,17 +46,17 @@ import net.rationalminds.es.EnvironmentalControl;
  * @author Vaibhav Pratap Singh
  */
 @Transactional
-@Component
+@Service
 public class Dao {
 
 	private static final Logger Log = LoggerFactory.getLogger(Dao.class);
-	private DataSource dataSource;
+	
 	private JdbcTemplate jdbcTemplate;
 
-	public void setDataSource(DataSource dataSource) {
+	@Resource(name="hsqlDataSource")
+	public void setDataSource(DataSource hsqlDataSource) {
 		Log.debug("creating data source assignement");
-		this.dataSource = dataSource;
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
+		this.jdbcTemplate = new JdbcTemplate(hsqlDataSource);
 	}
 	/**
 	 * 

@@ -43,7 +43,6 @@ import com.log.analyzer.commons.model.FileSearchResult;
 import com.log.analyzer.commons.model.SearchModel;
 import com.log.analyzer.commons.model.SearchResultModel;
 import com.log.server.LocalConstants;
-import com.log.server.SpringHelper;
 import com.log.server.comm.http.FileLineReader;
 import com.log.server.concurrent.NodalSearch;
 import com.log.server.concurrent.SaveUpdateSerachKeyword;
