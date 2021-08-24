@@ -1,6 +1,5 @@
 <%@page import="com.log.server.util.Utilities"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="d" uri="http://www.decorator.tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html ng-app="security-app">

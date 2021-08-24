@@ -66,7 +66,7 @@ public class Search {
 		SearchInput input = new SearchInput();
 		input.setViewTz("EST");
 		model.setInput(input);
-		ModelAndView mv = new ModelAndView("application", "model", model);
+		ModelAndView mv = new ModelAndView("secure/application", "model", model);
 		return mv;
 	}
 
@@ -81,7 +81,7 @@ public class Search {
 		SearchInput input = new SearchInput();
 		input.setViewTz("EST");
 		model.setInput(input);
-		ModelAndView mv = new ModelAndView("views/search_page", "model", model);
+		ModelAndView mv = new ModelAndView("secure/views/search_page", "model", model);
 		return mv;
 	}
 
