@@ -14,12 +14,12 @@
 	<properties>
 		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<org.springframework.version>5.3.9</org.springframework.version>
 		<log4j.version>1.2.17</log4j.version>
 		<spring.security.version>5.5.1</spring.security.version>
 		<pluto.commons.version>4.0</pluto.commons.version>
 		<pluto.charon.version>4.0</pluto.charon.version>
 		<rationalminds.dateparser.version>1.4</rationalminds.dateparser.version>
+		<build.by>rationalminds</build.by>
 	</properties>
 
 	<parent>
@@ -33,13 +33,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<!-- <version>2.5.3</version> -->
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-tomcat</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -48,16 +41,7 @@
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
-			<!-- <version>10.0.10</version> -->
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
-
-
 		<dependency>
 			<groupId>net.rationalminds</groupId>
 			<artifactId>DateParser</artifactId>
@@ -76,12 +60,6 @@
 			<type>jar</type>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.ant</groupId>
-			<artifactId>ant</artifactId>
-			<version>1.8.1</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>LogAnalyzerCommons</artifactId>
 			<version>${pluto.commons.version}</version>
@@ -91,7 +69,7 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>charon</artifactId>
 			<version>${pluto.charon.version}</version>
-			<scope>provided</scope>
+			<!-- <scope>provided</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
@@ -105,11 +83,7 @@
 			<version>2.8.7</version>
 			<type>jar</type>
 		</dependency>
-<!-- 		<dependency>
-			<groupId>com.googlecode.htmlcompressor</groupId>
-			<artifactId>htmlcompressor</artifactId>
-			<version>1.5.2</version>
-		</dependency> -->
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.jaxrs</groupId>
 			<artifactId>jackson-jaxrs-base</artifactId>
@@ -118,8 +92,8 @@
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
-			<version>8.0.1</version>
-			<scope>provided</scope>
+			<version>8.0</version>
+		<!-- 	<scope>provided</scope> -->
 		</dependency>
 		<!-- <dependency> <groupId>com.google.guava</groupId> <artifactId>guava</artifactId> 
 			<version>r05</version> </dependency> -->
@@ -148,29 +122,8 @@
 			<artifactId>joda-time</artifactId>
 			<version>2.7</version>
 		</dependency>
-		<!-- <dependency> <groupId>com.googlecode.htmlcompressor</groupId> <artifactId>htmlcompressor</artifactId> 
-			<version>1.5.2</version> </dependency> <dependency> <groupId>com.google.javascript</groupId> 
-			<artifactId>closure-compiler</artifactId> <version>v20210601</version> </dependency> 
-			<dependency> <groupId>com.yahoo.platform.yui</groupId> <artifactId>yuicompressor</artifactId> 
-			<version>2.4.6</version> </dependency> -->
 
 		<!-- TAGLIBS SECTION START -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<version>8.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-		</dependency>
 		<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
@@ -187,37 +140,6 @@
 		</dependency>
 		<!-- Cache Manager -->
 
-		<!-- SPRINGS SECTION START -->
-		<!-- <dependency> <groupId>org.springframework.integration</groupId> <artifactId>spring-integration-core</artifactId> 
-			<version>5.5.2</version> <type>jar</type> </dependency> <dependency> <groupId>org.springframework.webflow</groupId> 
-			<artifactId>org.springframework.js</artifactId> <version>2.4.8.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework</groupId> <artifactId>spring-core</artifactId> 
-			<version>${org.springframework.version}</version> </dependency> <dependency> 
-			<groupId>org.springframework</groupId> <artifactId>spring-expression</artifactId> 
-			<version>${org.springframework.version}</version> </dependency> <dependency> 
-			<groupId>org.springframework</groupId> <artifactId>spring-beans</artifactId> 
-			<version>${org.springframework.version}</version> </dependency> <dependency> 
-			<groupId>org.springframework</groupId> <artifactId>spring-aop</artifactId> 
-			<version>${org.springframework.version}</version> </dependency> <dependency> 
-			<groupId>org.springframework</groupId> <artifactId>spring-context</artifactId> 
-			<version>${org.springframework.version}</version> </dependency> <dependency> 
-			<groupId>org.springframework</groupId> <artifactId>spring-context-support</artifactId> 
-			<version>${org.springframework.version}</version> </dependency> <dependency> 
-			<groupId>org.springframework</groupId> <artifactId>spring-tx</artifactId> 
-			<version>${org.springframework.version}</version> </dependency> <dependency> 
-			<groupId>org.springframework</groupId> <artifactId>spring-oxm</artifactId> 
-			<version>${org.springframework.version}</version> </dependency> <dependency> 
-			<groupId>org.springframework</groupId> <artifactId>spring-web</artifactId> 
-			<version>${org.springframework.version}</version> </dependency> <dependency> 
-			<groupId>org.springframework</groupId> <artifactId>spring-webmvc</artifactId> 
-			<version>${org.springframework.version}</version> </dependency> <dependency> 
-			<groupId>org.springframework</groupId> <artifactId>spring-webmvc-portlet</artifactId> 
-			<version>${org.springframework.version}</version> </dependency> <dependency> 
-			<groupId>org.springframework</groupId> <artifactId>spring-jdbc</artifactId> 
-			<version>${org.springframework.version}</version> </dependency> <dependency> 
-			<groupId>org.springframework</groupId> <artifactId>spring-test</artifactId> 
-			<version>${org.springframework.version}</version> <scope>test</scope> </dependency> -->
-		<!-- SPRING SECTION ENDS -->
 		<!-- Spring Security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -227,12 +149,6 @@
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-taglibs</artifactId>
 		</dependency>
-		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-web</artifactId> 
-			<version>${spring.security.version}</version> </dependency> <dependency> 
-			<groupId>org.springframework.security</groupId> <artifactId>spring-security-config</artifactId> 
-			<version>${spring.security.version}</version> </dependency> <dependency> 
-			<groupId>org.springframework.security</groupId> <artifactId>spring-security-taglibs</artifactId> 
-			<version>${spring.security.version}</version> <scope>compile</scope> </dependency> -->
 
 		<!-- Spring security ends -->
 		<dependency>
@@ -240,8 +156,6 @@
 			<artifactId>validation-api</artifactId>
 			<version>2.0.1.Final</version>
 		</dependency>
-		<!-- <dependency> <groupId>log4j</groupId> <artifactId>log4j</artifactId> 
-			<version>${log4j.version}</version> </dependency> -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -268,11 +182,15 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.1.0</version>
+				<configuration>
+                <archive>
+                    <manifestEntries>
+                        <Built-By>${build.by}</Built-By>
+                        <Implementation-Vendor>net.rationalminds</Implementation-Vendor>
+                        <Implementation-URL>www.rationalminds.net</Implementation-URL>
+                    </manifestEntries>
+                </archive>
+            </configuration>
 			</plugin>
 		</plugins>
 	</build>
