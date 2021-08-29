@@ -32,7 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.log.analyzer.commons.Commons;
 import com.log.analyzer.commons.Constants;
@@ -67,7 +67,7 @@ import net.rationalminds.es.EnvironmentalControl;
  *
  * @author Vaibhav Pratap Singh
  */
-@Component
+@Service
 public class SearchBiz {
 
 	private final static Logger Log = LoggerFactory.getLogger(SearchBiz.class);

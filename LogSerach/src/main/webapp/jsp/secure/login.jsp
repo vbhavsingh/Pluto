@@ -120,7 +120,7 @@ input:-webkit-autofill {
 <script>
 	var securityApp = angular.module('security-app', []);
 	securityApp.controller('logincontroller', function($scope, $http) {
-		var httpRequest = $http.post("open/fobcheck.htm");
+		var httpRequest = $http.post("open/fobcheck");
 		httpRequest.success(function(response) {
 			$scope.reveal = response;
 		});

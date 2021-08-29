@@ -10,7 +10,7 @@ public class PlutoWebMvcConfiguration implements WebMvcConfigurer{
 
 	@Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("/application.htm");
+        registry.addRedirectViewController("/", "/application.htm");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
 	

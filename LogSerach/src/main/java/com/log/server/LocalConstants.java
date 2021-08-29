@@ -18,6 +18,8 @@ import org.slf4j.LoggerFactory;
  */
 public class LocalConstants {
 	
+	public static final String PASSWORD_PREFIX = "{bcrypt}";
+	
 	public static final Logger CLIENT_ACCESS_LOG = LoggerFactory.getLogger("nodeAccess");
 	
 	public static final Logger USER_ACCESS_LOG = LoggerFactory.getLogger("userAccess");
@@ -60,6 +62,8 @@ public class LocalConstants {
     
     public static final class KEYS{
     	public static final String NEW_INSTALL="fob.check";
+    	
+    	public static final String APPLY_PATCH="apply.patch";
     }
     
     public static final class ERROR {
@@ -116,6 +120,8 @@ public class LocalConstants {
                 + "WHERE NODE_NAME=? AND "
                 + "LABEL_NAME=?";
 
+        public static final String GET_ALL_USER_PROFILES="SELECT * FROM CREDENTIALS_USER";
+        
         public static final String USER_INSERT = "INSERT INTO CREDENTIALS_USER "
                 + "(USERNAME,PASSWORD,EMAIL,FIRST_NAME,LAST_NAME,CREATED_BY,CREATED_TIME,LAST_MODIFIED) "
                 + "VALUES (?,?,?,?,?,?,?,?)";

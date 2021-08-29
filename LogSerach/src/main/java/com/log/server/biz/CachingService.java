@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.log.server.LocalConstants;
 import com.log.server.model.LogRecordModel;
@@ -11,6 +12,7 @@ import com.log.server.model.ScrollableResultModel;
 import com.log.server.model.SearchInput;
 import com.log.server.model.ViewResultModel;
 
+@Service
 public class CachingService {
 	
 	@Autowired

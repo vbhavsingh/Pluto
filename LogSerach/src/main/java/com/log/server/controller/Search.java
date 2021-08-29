@@ -8,6 +8,7 @@ package com.log.server.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
@@ -46,6 +47,14 @@ public class Search {
 	
 	@Autowired
 	private CommonServices commonServices;
+	
+	@Autowired
+	CachingService svc;
+	
+	@RequestMapping(value = "/")
+    public String redirectToServices(){
+		return("forward:/application.htm");
+    }
 	
 	@RequestMapping(
 			value = "/version.htm", 
@@ -103,7 +112,7 @@ public class Search {
 	//	SearchBiz svc = new SearchBiz();
 		
 	//	ViewResultModel model = svc.getPaginatedSearchResult(input);
-		CachingService svc = new CachingService();
+		
 		ViewResultModel model = svc.getPaginatedSearchResult(input);
 
 		return model;

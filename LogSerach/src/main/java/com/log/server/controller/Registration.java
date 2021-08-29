@@ -17,7 +17,9 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,6 +47,9 @@ public class Registration {
 	
 	@Autowired
 	private AdminServices svc;
+	
+	@Autowired
+	private PasswordEncoder encoder;
 
 	@RequestMapping(value = "/secure/adduserview.htm")
 	@PreAuthorize("hasAuthority('"+LocalConstants.ROLE.ADMIN+"') or hasAuthority('"+LocalConstants.ROLE.GROUP_ADMIN+"')")
@@ -54,7 +59,7 @@ public class Registration {
 		AddEditUserModel model = new AddEditUserModel();
 		model.setAssignableGroups(svc.getAllApplicableGroups(security));
 		model.setAssignableRoles(svc.getAllApplicaleRole(security));
-		ModelAndView mv = new ModelAndView("../admin/views/adduser", "model", model);
+		ModelAndView mv = new ModelAndView("admin/views/adduser", "model", model);
 		LocalConstants.USER_ACCESS_LOG.info("{} : add user view request from user", security.getUser());
 		return mv;
 	}
@@ -69,6 +74,8 @@ public class Registration {
 	@ResponseBody
 	@PreAuthorize("hasAuthority('"+LocalConstants.ROLE.ADMIN+"') or hasAuthority('"+LocalConstants.ROLE.GROUP_ADMIN+"')")
 	public String addUser(@Valid UserCredentials user) {
+		user.setPassword(LocalConstants.PASSWORD_PREFIX + encoder.encode(user.getPassword()));
+		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		PlutoSecurityPrinicipal security = (PlutoSecurityPrinicipal) auth.getPrincipal();
 		user.setCreatedBy(security.getUsername());
@@ -108,6 +115,9 @@ public class Registration {
 	@RequestMapping(value = "/secure/updateprofile.htm", produces = "text/html")
 	@ResponseBody
 	public String saveProfileChanges(@Valid UserCredentials user) {
+		if(StringUtils.hasText(user.getPassword())) {
+			user.setPassword(LocalConstants.PASSWORD_PREFIX + encoder.encode(user.getPassword()));
+		}
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		PlutoSecurityPrinicipal security = (PlutoSecurityPrinicipal) auth.getPrincipal();
 		LocalConstants.USER_ACCESS_LOG.info("{} : made request to update user: {}",security.getUsername(),user.getUsername());
@@ -228,7 +238,7 @@ public class Registration {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/secure/fetchgroups", produces = "application/json")
+	@RequestMapping(value = "/secure/fetchgroups.htm", produces = "application/json")
 	@ResponseBody
 	@PreAuthorize("hasAuthority('"+LocalConstants.ROLE.ADMIN+"') or hasAuthority('"+LocalConstants.ROLE.GROUP_ADMIN+"')")
 	public List<Group> getGroupListForAdministration() {
@@ -243,7 +253,7 @@ public class Registration {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/secure/fetchusers", produces = "application/json")
+	@RequestMapping(value = "/secure/fetchusers.htm", produces = "application/json")
 	@ResponseBody
 	public List<UserCredentials> getUserListForAdministration() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -258,7 +268,7 @@ public class Registration {
 	 * 
 	 * @return
 	 */
-	@RequestMapping("/secure/profile")
+	@RequestMapping("/secure/profile.htm")
 	public ModelAndView getProfile() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		PlutoSecurityPrinicipal security = (PlutoSecurityPrinicipal) auth.getPrincipal();
@@ -267,7 +277,7 @@ public class Registration {
 		AddEditUserModel model = new AddEditUserModel();
 		model.setAssignableGroups(svc.getAllApplicableGroups(security));
 		model.setAssignableRoles(svc.getAllApplicaleRole(security));
-		ModelAndView mv = new ModelAndView("../admin/views/edituser", "model", model);
+		ModelAndView mv = new ModelAndView("/admin/views/edituser", "model", model);
 		return mv;
 	}
 
@@ -297,7 +307,7 @@ public class Registration {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/secure/nodelist", produces = "application/json")
+	@RequestMapping(value = "/secure/nodelist.htm", produces = "application/json")
 	@ResponseBody
 	@EnvironmentalControl(devMethod="com.log.server.util.DevEnvironmentMocker.giveMeDummyNodes()")
 	public List<NodeAgentViewModel> getNodeList() {
@@ -312,7 +322,7 @@ public class Registration {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/secure/updatenode", produces = "text/html")
+	@RequestMapping(value = "/secure/updatenode.htm", produces = "text/html")
 	@ResponseBody
 	public String updateNode(@Valid NodeAgentViewModel agent) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -359,7 +369,7 @@ public class Registration {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/secure/addnodelabelmap", produces = "text/html")
+	@RequestMapping(value = "/secure/addnodelabelmap.htm", produces = "text/html")
 	@ResponseBody
 	public String createLabelMapping(@Valid AgentLabelMapModel map) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

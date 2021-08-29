@@ -40,10 +40,6 @@ public class Pluto extends SpringBootServletInitializer {
     
 	private final static Logger Log = LoggerFactory.getLogger(Pluto.class);
 	
-	@Autowired
-    private  ApplicationContext appContext;
-
-	
 	@Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(Pluto.class);
@@ -94,15 +90,5 @@ public class Pluto extends SpringBootServletInitializer {
          }
          Log.info("executor pool destroyed, aborting {} task/s that were under progress", tasks.size());
     }
-    
-    @PostConstruct
-    private void displayBeans() {
-    	String[] beans = appContext.getBeanDefinitionNames();
-        Arrays.sort(beans);
-        for (String bean : beans) {
-         //   System.out.println(bean);
-        }
-    }
-    
 
 }

@@ -25,7 +25,7 @@
 		<label for="main-nav-check" class="toggle" onclick="" title="Close">&times;</label>
 		<ul>
 			<li><a href="">Welcome <sec:authentication property="principal.salutation" /></a></li>
-			<li><a href="/">Search</a></li>
+			<li><a href="${pageContext.request.contextPath}">Search</a></li>
 			<sec:authorize access="hasAuthority('ADMIN') or hasAuthority('GROUP_ADMIN')">
 			<li><a href="#">User Administration</a> <label for="fast-apps"
 				class="toggle-sub" onclick="">&#9658;</label> <input type="checkbox"

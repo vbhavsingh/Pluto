@@ -11,7 +11,7 @@
 	<http pattern="**/js/**" security="none" />
 	<http pattern="**/loginpage.html" security="none" />
 	<http pattern="**/img/**" security="none" />
-	<!-- <http pattern="/rs/**" security="none" /> -->
+	<http pattern="/download/charon.jar" security="none" />
 	
 	<http pattern="/rs/**">
 		<intercept-url pattern="/rs/**" access="hasAuthority('ROBOT')"/> 
@@ -19,6 +19,8 @@
 	</http>
 
 	<http use-expressions="true">
+		
+		<intercept-url pattern="/application.htm" access="isAuthenticated()" />
 	
 		<intercept-url pattern="/secure/**" access="isAuthenticated()" />
 
@@ -51,8 +53,6 @@
 	</http>
 
 	<b:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-<!--     	<constructor-arg name="strength" value="10" />
-	</bean> -->
 
 	<b:bean id="dbAuthentication" class="com.security.common.DbAuthenticationService"/>
 

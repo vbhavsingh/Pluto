@@ -32,7 +32,7 @@ public class Configuration {
     
     @Autowired
     private AdminServices svc;
-
+    
     /**
      * Registration of new nodes, this will also return communication key
      *
