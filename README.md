@@ -22,12 +22,11 @@ pluto server-client architecture
 To run Pluto® following are the software requirements for both tiers.
 
 Server side
-Java 1.7+
-Apache Tomcat 8 or equivalent Java application server.
+Java 1.8+
 Cient Side 
 Java 1.7+ available in system path.
 You see no database requirements are there. Pluto uses embedded database as it stores data for mostly authentication and its minimal profile maintenance purpose.
-To start, you can download the software in the format of war file from www.rationalminds.net and copy the war file inside your webapps in tomcat or deploy it in any application server of your choice.
+To start, you can download the software in the format of war file from www.rationalminds.net and run it directly using "java -jar pluto.war"
 
 Once you deploy the software type in the following URL in your browser window http://<MACHINE>:<PORT>/pluto. Here MACHINE is the name or IP of the server on which Pluto is deployed and PORT is the port number on which your application server or tomcat is running.
 
