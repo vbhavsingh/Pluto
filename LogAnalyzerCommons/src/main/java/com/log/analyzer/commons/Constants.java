@@ -19,9 +19,9 @@ public class Constants {
 
 	public static final String LOG_ON_CONSOLE = "log.console";
 
-	public static final String VERSION = "4.0";
+	public static final String VERSION = "5.0";
 
-	public static final String CURRENT_AGENT_VERSION = "4.0";
+	public static final String CURRENT_AGENT_VERSION = "5.0";
 
 	public static final String fileTypesArg = "com.log.filetype";
 

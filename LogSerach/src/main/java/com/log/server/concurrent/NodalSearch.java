@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 import com.google.gson.Gson;
@@ -22,7 +23,6 @@ import com.log.analyzer.commons.model.AgentModel;
 import com.log.analyzer.commons.model.SearchModel;
 import com.log.analyzer.commons.model.SearchResultModel;
 import com.log.server.LocalConstants;
-import com.log.server.SpringHelper;
 import com.log.server.biz.AdminServices;
 import com.log.server.util.Utilities;
 import com.sun.jersey.api.client.Client;
@@ -38,6 +38,9 @@ import net.rationalminds.es.EnvironmentalControl;
 public class NodalSearch implements Callable<SearchResultModel> {
 
 	private static final Logger Log = LoggerFactory.getLogger(NodalSearch.class);
+	
+	@Autowired
+	private AdminServices adminServices;
 
 	AgentModel node;
 	SearchModel searchModel;
@@ -143,8 +146,7 @@ public class NodalSearch implements Callable<SearchResultModel> {
 	 */
 	private void removeUserMapping() {
 		try {
-			AdminServices svc = (AdminServices) SpringHelper.getBean("AdminServices");
-			svc.deleteUserNodeMapping(searchModel.getUserName(), node.getClientNode());
+			adminServices.deleteUserNodeMapping(searchModel.getUserName(), node.getClientNode());
 		} catch (Exception e) {
 			Log.error("error while deleting bad user: {} node: {} mapping", searchModel.getUserName(), node.getClientName(), e);
 		}

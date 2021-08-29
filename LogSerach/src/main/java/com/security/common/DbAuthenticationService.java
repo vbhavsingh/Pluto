@@ -12,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.log.server.LocalConstants;
 import com.log.server.data.db.Dao;
@@ -19,15 +20,12 @@ import com.log.server.model.Group;
 import com.log.server.model.Role;
 import com.log.server.model.UserCredentials;
 
-public class DbAuthenticationService implements UserDetailsService {
+@Service 
+class DbAuthenticationService implements UserDetailsService {
 	private static final Logger  Log = LoggerFactory.getLogger(DbAuthenticationService.class);
 
-	private Dao dao;
-
 	@Autowired
-	public void setDao(Dao dao) {
-		this.dao = dao;
-	}
+	private Dao dao;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

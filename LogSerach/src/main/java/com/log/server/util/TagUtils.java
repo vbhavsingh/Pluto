@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 
 import javax.servlet.jsp.tagext.TagSupport;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.util.HtmlUtils;
 
 import com.log.server.biz.CommonServices;
@@ -23,8 +25,19 @@ import com.log.server.model.ViewResultModel;
  *
  * @author Vaibhav Pratap Singh
  */
+@Component
 public class TagUtils extends TagSupport {
 
+	private static final long serialVersionUID = 1L;
+	
+	private static CommonServices commonServices;
+
+	
+	@Autowired
+	public void setCommonServices(CommonServices commonServices) {
+		TagUtils.commonServices = commonServices;
+	}
+	
     /**
      *
      * @param i
@@ -94,7 +107,7 @@ public class TagUtils extends TagSupport {
     * @return
     */
    public static String previousSearchCriterias(String fieldName) {
-       List<String> suggestions = CommonServices.getPreviousSearchCriterias(fieldName);
+       List<String> suggestions = commonServices.getPreviousSearchCriterias(fieldName);
        if (suggestions == null || suggestions.size() == 0) {
            return null;
        }
@@ -117,7 +130,7 @@ public class TagUtils extends TagSupport {
      * @return
      */
     public static String labels() {
-        List<LabelCounter> labelList = CommonServices.getLabelListWithNodeCounter();
+        List<LabelCounter> labelList = commonServices.getLabelListWithNodeCounter();
         if (labelList == null || labelList.size() == 0) {
             return null;
         }
@@ -138,7 +151,7 @@ public class TagUtils extends TagSupport {
     * @return
     */
    public static String labelsArray() {
-       List<LabelCounter> labelList = CommonServices.getLabelListWithNodeCounter();
+       List<LabelCounter> labelList = commonServices.getLabelListWithNodeCounter();
        if (labelList == null || labelList.size() == 0) {
            return null;
        }

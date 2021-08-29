@@ -3,14 +3,21 @@ package com.log.server.biz;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.log.server.LocalConstants;
-import com.log.server.SpringHelper;
 import com.log.server.model.LogRecordModel;
 import com.log.server.model.ScrollableResultModel;
 import com.log.server.model.SearchInput;
 import com.log.server.model.ViewResultModel;
 
+@Service
 public class CachingService {
+	
+	@Autowired
+	SearchBiz searchBiz;
+	
 	/**
 	 * 
 	 * @param input
@@ -21,7 +28,7 @@ public class CachingService {
 	 */
 	public ScrollableResultModel getNextScroll(SearchInput input) throws InterruptedException, ExecutionException, Exception{
 		
-		ViewResultModel result= SpringHelper.searchBean().getSearchResult(input,input.getKey());
+		ViewResultModel result= searchBiz.getSearchResult(input,input.getKey());
 		
 		ScrollableResultModel scroll = new ScrollableResultModel();
 		List<LogRecordModel> records = null;
@@ -69,7 +76,7 @@ public class CachingService {
 	 */
 	public ViewResultModel getPaginatedSearchResult(SearchInput input) throws InterruptedException, ExecutionException, Exception{
 		
-		ViewResultModel model= SpringHelper.searchBean().getSearchResult(input, input.getKey());
+		ViewResultModel model= searchBiz.getSearchResult(input, input.getKey());
 		ViewResultModel paginatedModel = new ViewResultModel();
 		paginatedModel.setAllowedTimeZoneList(model.getAllowedTimeZoneList());
 		paginatedModel.setDatedList(model.getDatedList());

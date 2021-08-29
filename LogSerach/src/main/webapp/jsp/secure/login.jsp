@@ -1,8 +1,6 @@
 <%@page import="com.log.server.util.Utilities"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="d" uri="http://www.decorator.tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib uri="http://htmlcompressor.googlecode.com/taglib/compressor" prefix="compress" %>
 <!DOCTYPE html>
 <html ng-app="security-app">
 <head>
@@ -122,7 +120,7 @@ input:-webkit-autofill {
 <script>
 	var securityApp = angular.module('security-app', []);
 	securityApp.controller('logincontroller', function($scope, $http) {
-		var httpRequest = $http.post("open/fobcheck.htm");
+		var httpRequest = $http.post("open/fobcheck");
 		httpRequest.success(function(response) {
 			$scope.reveal = response;
 		});

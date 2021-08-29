@@ -7,6 +7,7 @@ package com.log.server.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,6 @@ import com.log.analyzer.commons.model.AgentCommands;
 import com.log.analyzer.commons.model.AgentConfigurationModel;
 import com.log.analyzer.commons.model.AgentRegistrationForm;
 import com.log.server.LocalConstants;
-import com.log.server.SpringHelper;
 import com.log.server.biz.AdminServices;
 
 /**
@@ -30,8 +30,9 @@ public class Configuration {
 
     private static final Logger Log = LoggerFactory.getLogger(Configuration.class);
     
-    private AdminServices svc = (AdminServices) SpringHelper.getBean("AdminServices");
-
+    @Autowired
+    private AdminServices svc;
+    
     /**
      * Registration of new nodes, this will also return communication key
      *

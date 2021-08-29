@@ -9,11 +9,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.sound.midi.Patch;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.log.analyzer.commons.Constants;
 import com.log.analyzer.commons.Util;
@@ -28,6 +33,8 @@ import com.log.server.concurrent.MapNodeWithUsers;
 import com.log.server.concurrent.MapUserWithNodes;
 import com.log.server.concurrent.UpdateRemoteAgent;
 import com.log.server.data.db.Dao;
+import com.log.server.data.db.patch.Patch2018;
+import com.log.server.data.db.patch.PatchAugust2021;
 import com.log.server.model.AgentLabelMapModel;
 import com.log.server.model.Group;
 import com.log.server.model.NodeAgentViewModel;
@@ -40,23 +47,20 @@ import com.security.common.PlutoSecurityPrinicipal;
  *
  * @author Vaibhav Singh
  */
+@Component
 public class AdminServices {
 
 	private final static Logger Log = LoggerFactory.getLogger(AdminServices.class);
 
-	private Dao dao;
-
 	@Autowired
-	public void setDao(Dao dao) {
-		this.dao = dao;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
+	private Dao dao;
+	
+	@Autowired
+	private ApplicationContext context;
+	
+	
 	public Dao getDao() {
-		return this.dao;
+		return dao;
 	}
 
 	/**
@@ -267,7 +271,7 @@ public class AdminServices {
 		this.dao.deleteUserRoleMapping(user.getUsername());
 		this.dao.deleteUserGroupMapping(user.getUsername());
 		Log.trace("Updating user: {}, creating new role and group mappings", user);
-		if (user.getPassword() == null || user.getPassword().length() < 1) {
+		if (StringUtils.hasText(user.getPassword())) {
 			this.dao.updateUserProfile(user);
 		} else {
 			this.dao.updateUserProfileAndPassword(user);
@@ -505,7 +509,15 @@ public class AdminServices {
 		}
 		if(this.dao.ifRoleExists(LocalConstants.ROLE.BOT)==false) {
 			UserCredentials user = new UserCredentials(LocalConstants.USER_DEFAULTS.USERNAME, LocalConstants.USER_DEFAULTS.PASSWORD);
-			this.dao.dbPatchJuly2018(user);
+			if(Boolean.parseBoolean(System.getProperty(LocalConstants.KEYS.APPLY_PATCH))) {
+				Patch2018 patch2018 = context.getBean(Patch2018.class);
+				patch2018.applyPatch(user);
+			}
+		}
+		
+		if(Boolean.parseBoolean(System.getProperty(LocalConstants.KEYS.APPLY_PATCH))) {
+			PatchAugust2021 patch2021 = context.getBean(PatchAugust2021.class);
+			patch2021.applyPatch();
 		}
 	}
 

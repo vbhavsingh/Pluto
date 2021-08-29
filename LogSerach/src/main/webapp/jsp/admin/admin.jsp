@@ -2,7 +2,6 @@
 <%@page import="com.log.server.util.Utilities"%>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://htmlcompressor.googlecode.com/taglib/compressor" prefix="compress" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!doctype html>
 <html ng-app="admin-app">
@@ -26,7 +25,7 @@
 		<label for="main-nav-check" class="toggle" onclick="" title="Close">&times;</label>
 		<ul>
 			<li><a href="">Welcome <sec:authentication property="principal.salutation" /></a></li>
-			<li><a href="/pluto/">Search</a></li>
+			<li><a href="${pageContext.request.contextPath}">Search</a></li>
 			<sec:authorize access="hasAuthority('ADMIN') or hasAuthority('GROUP_ADMIN')">
 			<li><a href="#">User Administration</a> <label for="fast-apps"
 				class="toggle-sub" onclick="">&#9658;</label> <input type="checkbox"

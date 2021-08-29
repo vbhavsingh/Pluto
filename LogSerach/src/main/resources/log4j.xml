@@ -7,7 +7,7 @@
 		class="org.apache.log4j.RollingFileAppender">
 		<param name="maxFileSize" value="5MB" />
 		<param name="maxBackupIndex" value="2" />
-		<param name="File" value="logs/edart.log" />
+		<param name="File" value="logs/pluto.debug..log" />
 		<param name="threshold" value="debug" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern"
@@ -21,7 +21,7 @@
 		class="org.apache.log4j.RollingFileAppender">
 		<param name="maxFileSize" value="5MB" />
 		<param name="maxBackupIndex" value="5" />
-		<param name="File" value="${catalina.home}/logs/pluto.log" />
+		<param name="File" value="logs/pluto.info.log" />
 		<param name="threshold" value="INFO" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern"
@@ -33,7 +33,7 @@
 		class="org.apache.log4j.RollingFileAppender">
 		<param name="maxFileSize" value="5MB" />
 		<param name="maxBackupIndex" value="5" />
-		<param name="File" value="${catalina.home}/logs/pluto.error.log" />
+		<param name="File" value="logs/pluto.error.log" />
 		<param name="threshold" value="error" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern"
@@ -44,7 +44,7 @@
 	<appender name="all" class="org.apache.log4j.RollingFileAppender">
 		<param name="maxFileSize" value="15MB" />
 		<param name="maxBackupIndex" value="5" />
-		<param name="File" value="${catalina.home}/logs/pluto.log" />
+		<param name="File" value="logs/pluto.log" />
 		<param name="threshold" value="trace" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern"
@@ -63,7 +63,7 @@
 	<appender name="nodeAccess" class="org.apache.log4j.RollingFileAppender">
         <param name="maxFileSize" value="15MB" />
         <param name="maxBackupIndex" value="5" />
-        <param name="File" value="${catalina.home}/logs/pluto.charon.log" />
+        <param name="File" value="logs/pluto.charon.log" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"  value="%d{DATE} %-5p : %m%n" />
         </layout>
@@ -72,7 +72,7 @@
     <appender name="userAccess" class="org.apache.log4j.RollingFileAppender">
         <param name="maxFileSize" value="15MB" />
         <param name="maxBackupIndex" value="5" />
-        <param name="File" value="${catalina.home}/logs/pluto.access.log" />
+        <param name="File" value="logs/pluto.access.log" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"  value="%d{DATE} %-5p : %m%n" />
         </layout>

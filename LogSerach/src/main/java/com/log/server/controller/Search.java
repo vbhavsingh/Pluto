@@ -5,31 +5,30 @@
  */
 package com.log.server.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.log.analyzer.commons.Constants;
 import com.log.analyzer.commons.model.FileLineRequestModel;
-import com.log.server.SpringHelper;
 import com.log.server.biz.CachingService;
 import com.log.server.biz.CommonServices;
+import com.log.server.biz.SearchBiz;
 import com.log.server.model.FileLineServerResultModel;
-import com.log.server.model.LogRecordModel;
 import com.log.server.model.ScrollableResultModel;
 import com.log.server.model.SearchInput;
 import com.log.server.model.ViewResultModel;
@@ -43,7 +42,25 @@ public class Search {
 
 	private final static Logger Log = LoggerFactory.getLogger(Search.class);
 	
-	@RequestMapping(value = "/version.htm", produces=MediaType.TEXT_PLAIN)
+	@Autowired
+	private SearchBiz searchBiz;
+	
+	@Autowired
+	private CommonServices commonServices;
+	
+	@Autowired
+	CachingService svc;
+	
+	@RequestMapping(value = "/")
+    public String redirectToServices(){
+		return("forward:/application.htm");
+    }
+	
+	@RequestMapping(
+			value = "/version.htm", 
+			produces=MediaType.TEXT_PLAIN,
+			method = RequestMethod.GET)
+	@ResponseBody
 	public String version(){
 		return Constants.VERSION;
 	}
@@ -58,7 +75,7 @@ public class Search {
 		SearchInput input = new SearchInput();
 		input.setViewTz("EST");
 		model.setInput(input);
-		ModelAndView mv = new ModelAndView("application", "model", model);
+		ModelAndView mv = new ModelAndView("secure/application", "model", model);
 		return mv;
 	}
 
@@ -73,7 +90,7 @@ public class Search {
 		SearchInput input = new SearchInput();
 		input.setViewTz("EST");
 		model.setInput(input);
-		ModelAndView mv = new ModelAndView("views/search_page", "model", model);
+		ModelAndView mv = new ModelAndView("secure/views/search_page", "model", model);
 		return mv;
 	}
 
@@ -95,7 +112,7 @@ public class Search {
 	//	SearchBiz svc = new SearchBiz();
 		
 	//	ViewResultModel model = svc.getPaginatedSearchResult(input);
-		CachingService svc = new CachingService();
+		
 		ViewResultModel model = svc.getPaginatedSearchResult(input);
 
 		return model;
@@ -128,7 +145,7 @@ public class Search {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		input.setSessionId(request.getSession().getId());
 		input.setUserName(auth.getName());
-		return SpringHelper.searchBean().getLinesInRangeFromFile(input);
+		return searchBiz.getLinesInRangeFromFile(input);
 	}
 
 	/**
@@ -137,7 +154,7 @@ public class Search {
 	 */
 	@RequestMapping("/login.htm")
 	public ModelAndView getLoginPage() {
-		ModelAndView mv = new ModelAndView("login", "model", null);
+		ModelAndView mv = new ModelAndView("secure/login", "model", null);
 		return mv;
 	}
 	
@@ -145,6 +162,6 @@ public class Search {
 	@RequestMapping(value = "/labels.htm", produces = MediaType.APPLICATION_JSON)
 	@ResponseBody
 	public List<String> getLabels() {
-		return CommonServices.getLabelList();
+		return commonServices.getLabelList();
 	}
 }

@@ -30,7 +30,9 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
 
 import com.log.analyzer.commons.Commons;
 import com.log.analyzer.commons.Constants;
@@ -41,7 +43,6 @@ import com.log.analyzer.commons.model.FileSearchResult;
 import com.log.analyzer.commons.model.SearchModel;
 import com.log.analyzer.commons.model.SearchResultModel;
 import com.log.server.LocalConstants;
-import com.log.server.SpringHelper;
 import com.log.server.comm.http.FileLineReader;
 import com.log.server.concurrent.NodalSearch;
 import com.log.server.concurrent.SaveUpdateSerachKeyword;
@@ -66,6 +67,7 @@ import net.rationalminds.es.EnvironmentalControl;
  *
  * @author Vaibhav Pratap Singh
  */
+@Service
 public class SearchBiz {
 
 	private final static Logger Log = LoggerFactory.getLogger(SearchBiz.class);
@@ -74,6 +76,9 @@ public class SearchBiz {
 	private static final Pattern patternContain;
 	private static final Pattern patternRemove;
 	private Parser parser = new Parser();
+	
+	@Autowired
+	private Dao dao;
 
 	static {
 		patternContain = Pattern.compile(pattern);
@@ -111,7 +116,6 @@ public class SearchBiz {
 		daoIp.setLogFileNamePatterns(logFileNamePatterns);
 		daoIp.setLogPathPatterns(logPathPatterns);
 		daoIp.setSearchOnLabels(searchOnLabels);
-		Dao dao = SpringHelper.getDao();
 		List<AgentModel> nodes = dao.getClients(daoIp);
 
 		if (nodes.isEmpty()) {
@@ -398,7 +402,6 @@ public class SearchBiz {
 		if(command == null){
 			throw new Exception("file name not present");
 		}
-		Dao dao = SpringHelper.getDao();
 		model.setCommand(command);
 		AgentModel agent = dao.getRegisteredAgent(model.getNodeName());
 		FileLineReader reader = new FileLineReader();
