@@ -58,6 +58,9 @@ public class AdminServices {
 	@Autowired
 	private ApplicationContext context;
 	
+	@Autowired
+	private Patch2018 patch2018;
+	
 	
 	public Dao getDao() {
 		return dao;
@@ -509,10 +512,7 @@ public class AdminServices {
 		}
 		if(this.dao.ifRoleExists(LocalConstants.ROLE.BOT)==false) {
 			UserCredentials user = new UserCredentials(LocalConstants.USER_DEFAULTS.USERNAME, LocalConstants.USER_DEFAULTS.PASSWORD);
-			if(Boolean.parseBoolean(System.getProperty(LocalConstants.KEYS.APPLY_PATCH))) {
-				Patch2018 patch2018 = context.getBean(Patch2018.class);
-				patch2018.applyPatch(user);
-			}
+			patch2018.applyPatch(user);
 		}
 		
 		if(Boolean.parseBoolean(System.getProperty(LocalConstants.KEYS.APPLY_PATCH))) {
