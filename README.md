@@ -77,11 +77,11 @@ Search result - more lines from file
  This screen apart from file contents show you some other details like file size and created and modified date. In many cases created and modified date are same as operating systems don't capture that data.
 
 
-Pluto version 4.0 now contains time-based search that has been added through a proprietary solution to perform the time-based search on log text without indexing or ingesting the logs into another system or file. The proprietary algorithm identifies the file date patterns and generates a search expression for the provided interval to accomplish what other major software's of this field accomplish by ingesting the log files into big data systems. The system allows you to search in any time zone from any time zone, up to the accuracy of a second.
+Pluto version 5.0 now contains time-based search that has been added through a proprietary solution to perform the time-based search on log text without indexing or ingesting the logs into another system or file. The proprietary algorithm identifies the file date patterns and generates a search expression for the provided interval to accomplish what other major software's of this field accomplish by ingesting the log files into big data systems. The system allows you to search in any time zone from any time zone, up to the accuracy of a second.
 
 
 now search with time interval
-Pluto version 4.0 also contains rest based API to invoke search by the third party applications. The search can now be integrated with third-party monitoring, dashboarding and other functions. The API can be made available by assigning the role 'robot' to users. The output information is in JSON and contains search and search metadata as present in the Pluto GUI
+Pluto version 5.0 also contains rest based API to invoke search by the third party applications. The search can now be integrated with third-party monitoring, dashboarding and other functions. The API can be made available by assigning the role 'robot' to users. The output information is in JSON and contains search and search metadata as present in the Pluto GUI
 
 An interesting aspect has been added as a separate tab on the result page to visualize frequency of search by day, node and server.
 
