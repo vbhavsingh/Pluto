@@ -2,6 +2,11 @@ package com.log.server.model;
 
 public class ScrollInput extends SearchInput {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private String dataType;
 
 	private int index;

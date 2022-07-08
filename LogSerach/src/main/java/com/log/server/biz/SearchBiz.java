@@ -6,7 +6,6 @@
 package com.log.server.biz;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -47,10 +46,10 @@ import com.log.server.comm.http.FileLineReader;
 import com.log.server.concurrent.NodalSearch;
 import com.log.server.concurrent.SaveUpdateSerachKeyword;
 import com.log.server.concurrent.UserNodeCorrection;
-import com.log.server.data.db.Dao;
+import com.log.server.data.db.service.ConfigurationService;
+import com.log.server.data.db.service.UserDataService;
 import com.log.server.model.DaoSearchModel;
 import com.log.server.model.FileLineServerResultModel;
-import com.log.server.model.Group;
 import com.log.server.model.LogRecordModel;
 import com.log.server.model.SearchInput;
 import com.log.server.model.ViewResultModel;
@@ -78,7 +77,10 @@ public class SearchBiz {
 	private Parser parser = new Parser();
 	
 	@Autowired
-	private Dao dao;
+	private UserDataService userDataService;
+	
+	@Autowired
+	private ConfigurationService configurationService;
 
 	static {
 		patternContain = Pattern.compile(pattern);
@@ -116,7 +118,7 @@ public class SearchBiz {
 		daoIp.setLogFileNamePatterns(logFileNamePatterns);
 		daoIp.setLogPathPatterns(logPathPatterns);
 		daoIp.setSearchOnLabels(searchOnLabels);
-		List<AgentModel> nodes = dao.getClients(daoIp);
+		List<AgentModel> nodes = configurationService.getClients(daoIp); //dao.getClients(daoIp);
 
 		if (nodes.isEmpty()) {
 			Log.warn("no nodes found for search labels: {}", input.getSearchOnLabels());
@@ -139,10 +141,11 @@ public class SearchBiz {
 		 * check if user belongs to super user group, these users can search all
 		 * nodes irrespective of their id being present there
 		 */
-		List<Group> assignedGroups = dao.getAssignedGroupsForUser(input.getUserName());
+		//List<Group> assignedGroups = dao.getAssignedGroupsForUser(input.getUserName());
+		String[] assignedGroups = userDataService.getUserById(input.getUserName()).getGroups();
 		if (assignedGroups != null) {
-			for (Group gp : assignedGroups) {
-				if (LocalConstants.SUPEGROUP.equals(gp.getName())) {
+			for (String gpName : assignedGroups) {
+				if (LocalConstants.SUPEGROUP.equals(gpName)) {
 					searchModel.setVip(true);
 					break;
 				}
@@ -238,7 +241,6 @@ public class SearchBiz {
 			if (result.getWarnings().isMaxFileLimitBreached()) {
 				maxFileLimitBreached = true;
 				int filesSearched = result.getResultList().size();
-				int totalFilesFound = result.getFilesFoundCount();
 				faultNodeNames.put(result.getNodeName(),Utilities.getMaxFileLimitViolationMsg(result, filesSearched));
 			}
 		}
@@ -285,7 +287,6 @@ public class SearchBiz {
 		List<GraphRowElement> fileFrequencyChart = new ArrayList<GraphRowElement>();
 
 		int fileCount = 0;
-		int lineCount = 0;
 		int datedLineCnt = 0;
 		int undatedLineCnt = 0;
 		int totalSearchableFiles = 0;
@@ -306,7 +307,7 @@ public class SearchBiz {
 
 			totalSearchableFiles += nodeResult.getFilesFoundCount();
 			List<FileSearchResult> fileSearchResultList = nodeResult.getResultList();
-			Iterator i = fileSearchResultList.iterator();
+			Iterator<FileSearchResult> i = fileSearchResultList.iterator();
 			while (i.hasNext()) {
 				fileCount++;
 				FileSearchResult st = (FileSearchResult) i.next();
@@ -314,7 +315,6 @@ public class SearchBiz {
 				int trimCount = st.getTrimmedCount() == 0 ? 0 : st.getCount() - st.getTrimmedCount();
 				Iterator<String> textLineIterator = textLineList.iterator();
 				while (textLineIterator.hasNext()) {
-					lineCount++;
 					String textLine = textLineIterator.next();
 					int lineNumDelimeterPos = textLine.indexOf(":");
 					LogRecordModel view = new LogRecordModel();
@@ -403,7 +403,8 @@ public class SearchBiz {
 			throw new Exception("file name not present");
 		}
 		model.setCommand(command);
-		AgentModel agent = dao.getRegisteredAgent(model.getNodeName());
+		//AgentModel agent = dao.getRegisteredAgent(model.getNodeName());
+		AgentModel agent = configurationService.getAgentModel(model.getNodeName());
 		FileLineReader reader = new FileLineReader();
 		FileLineClientResultModel result = reader.readLines(model, agent);
 		List<String> logLines = result.getTextInRange();
@@ -412,10 +413,10 @@ public class SearchBiz {
 		 * check if user belongs to super user group, these users can search all
 		 * nodes irrespective of their id being present there
 		 */
-		List<Group> assignedGroups = dao.getAssignedGroupsForUser(model.getUserName());
+		String[] assignedGroups = userDataService.getUserById(model.getUserName()).getGroups();
 		if (assignedGroups != null) {
-			for (Group gp : assignedGroups) {
-				if (LocalConstants.SUPEGROUP.equals(gp.getName())) {
+			for (String gpName : assignedGroups) {
+				if (LocalConstants.SUPEGROUP.equals(gpName)) {
 					model.setVip(true);
 					break;
 				}
@@ -668,7 +669,7 @@ public class SearchBiz {
 		String parts[] = null;
 		if (searchQuery != null && !searchQuery.trim().equals("")) {
 			Matcher match = patternRemove.matcher(searchQuery);
-			List temp = new ArrayList();
+			List<String> temp = new ArrayList<String>();
 			while (match.find()) {
 				String s = match.group();
 				s = s.replace("-", "").trim();
@@ -691,8 +692,7 @@ public class SearchBiz {
 		String parts[] = null;
 		if (searchQuery != null && !searchQuery.trim().equals("")) {
 			Matcher match = patternContain.matcher(searchQuery);
-			List temp = new ArrayList();
-			int c = match.groupCount();
+			List<String> temp = new ArrayList<String>();
 			while (match.find()) {
 				String s = match.group();
 				s = s.replace("\"", "").trim();
@@ -779,8 +779,6 @@ public class SearchBiz {
 	
 	
 	public DateTimeLocal convertTimeZones(String dateText, String frmTz, String toTz) {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-
 		/*
 		 * Convert the time string into a string with valid timezone appeneded
 		 * to it

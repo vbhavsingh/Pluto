@@ -78,10 +78,6 @@ public class VerifyUserCall {
 	public boolean verifyUser(NodeAgentViewModel node, String user) {
 		List<String> userList = new ArrayList<String>();
 		userList.add(user);
-		List<String> result = verifyUserList(node, userList);
-		if (userList == null) {
-			return false;
-		}
 		if (userList.contains(user)) {
 			return true;
 		}

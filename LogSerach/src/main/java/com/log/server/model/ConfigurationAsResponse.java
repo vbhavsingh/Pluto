@@ -5,8 +5,8 @@
  */
 package com.log.server.model;
 
-import java.util.Date;
 import java.util.List;
+
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 /**
@@ -27,7 +27,6 @@ public class ConfigurationAsResponse {
 
     private int searchThreadCount;
     
-    private Date responseLastSent;
 
     public List<String> getFileTypesToSearch() {
         return fileTypesToSearch;

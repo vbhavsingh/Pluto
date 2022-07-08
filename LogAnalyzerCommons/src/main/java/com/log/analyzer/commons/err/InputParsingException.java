@@ -2,6 +2,11 @@ package com.log.analyzer.commons.err;
 
 public class InputParsingException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public InputParsingException() {
 		super();
 		// TODO Auto-generated constructor stub

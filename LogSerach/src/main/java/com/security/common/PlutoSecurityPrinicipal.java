@@ -12,6 +12,9 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
+import com.log.server.model.Group;
+import com.log.server.model.UserCredentialsModel;
+
 /**
  *
  * @author Vaibhav Singh
@@ -26,7 +29,9 @@ public class PlutoSecurityPrinicipal extends User {
 	
 	private String user;
 
-	private List<String> assignedGroups;
+	private UserCredentialsModel userDetail;
+	
+	private List<Group> assignedGroups;
 
 	private String assignedRole;
 
@@ -42,11 +47,11 @@ public class PlutoSecurityPrinicipal extends User {
 		this.user = user;
 	}
 
-	public List<String> getAssignedGroups() {
+	public List<Group> getAssignedGroups() {
 		return assignedGroups;
 	}
 
-	public void setAssignedGroups(List<String> assignedGroups) {
+	public void setAssignedGroups(List<Group> assignedGroups) {
 		this.assignedGroups = assignedGroups;
 	}
 
@@ -72,6 +77,15 @@ public class PlutoSecurityPrinicipal extends User {
 
 	public void setSalutation(String salutation) {
 		this.salutation = salutation;
+	}
+	
+
+	public UserCredentialsModel getUserDetail() {
+		return userDetail;
+	}
+
+	public void setUserDetail(UserCredentialsModel userDetail) {
+		this.userDetail = userDetail;
 	}
 
 	@Override

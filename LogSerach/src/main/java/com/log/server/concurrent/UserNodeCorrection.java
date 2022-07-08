@@ -17,26 +17,28 @@ import com.log.server.biz.CommonServices;
  */
 public class UserNodeCorrection implements Runnable {
 
-    private Logger Log = LoggerFactory.getLogger(UserNodeCorrection.class);
+	private Logger Log = LoggerFactory.getLogger(UserNodeCorrection.class);
 
-    private String nodeName;
-    private String userName;
-    
-    @Autowired
-    private CommonServices commonServices;
+	private String nodeName;
+	private String userName;
 
-    public UserNodeCorrection(String userName, String nodeName) {
-        this.nodeName = nodeName;
-        this.userName = userName;
-    }
+	@Autowired
+	private CommonServices commonServices;
 
-    @Override
-    public void run() {
-        Log.trace("deleting user role mapping for user: {}  & node: {}", userName, nodeName);
-        int r = commonServices.deleteUserNodeMapping(userName, nodeName);
-        if (r == 1) {
-            Log.info("deleted user role mapping for user: {}  & node: {}", userName, nodeName);
-        }
-    }
+	public UserNodeCorrection(String userName, String nodeName) {
+		this.nodeName = nodeName;
+		this.userName = userName;
+	}
+
+	@Override
+	public void run() {
+		Log.trace("deleting user role mapping for user: {}  & node: {}", userName, nodeName);
+		try {
+			commonServices.deleteUserNodeMapping(userName, nodeName);
+			Log.info("deleted user role mapping for user: {}  & node: {}", userName, nodeName);
+		} catch (Exception e) {
+			Log.error("error while deleting user role mapping for user: {}  & node: {}", userName, nodeName);
+		}
+	}
 
 }

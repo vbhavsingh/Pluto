@@ -11,7 +11,6 @@ import java.util.Map;
  */
 public class RestSearchResultModel {
 
-	private static final long serialVersionUID = -920618608601248587L;
 	private List<LogRecordModel> datedList;
 	private List<LogRecordModel> unDatedList;
 	private Map<String, List<String>> nodeMessages = new HashMap<String, List<String>>();

@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import com.log.server.biz.AdminServices;
 import com.log.server.comm.http.VerifyUserCall;
+import com.log.server.data.db.service.UserDataService;
 import com.log.server.model.NodeAgentViewModel;
-import com.log.server.model.UserCredentials;
+import com.log.server.model.UserCredentialsModel;
 
 public class MapNodeWithUsers implements Runnable {
 
@@ -19,14 +20,14 @@ public class MapNodeWithUsers implements Runnable {
 	private List<String> userList;
 
 	private NodeAgentViewModel node;
+	
+	@Autowired
+	private UserDataService userDataService;
 
-	private AdminServices svc;
-
-	public MapNodeWithUsers(List<String> userList, NodeAgentViewModel node, AdminServices svc) {
+	public MapNodeWithUsers(List<String> userList, NodeAgentViewModel node) {
 		super();
 		this.node = node;
 		this.userList = userList;
-		this.svc = svc;
 	}
 
 	@Override
@@ -41,10 +42,10 @@ public class MapNodeWithUsers implements Runnable {
 		List<String> validatedUsers = call.verifyUserList(node, userList);
 		if (validatedUsers != null) {
 			for (String user : validatedUsers) {
-				UserCredentials u=new UserCredentials();
+				UserCredentialsModel u=new UserCredentialsModel();
 				u.setUsername(user);
 				u.setCreatedBy("AUTO");
-				this.svc.getDao().createUserNodeMapping(u, node.getNodeName());
+				userDataService.createUserNodeMapping(u, node.getNodeName());
 			}
 		}
 

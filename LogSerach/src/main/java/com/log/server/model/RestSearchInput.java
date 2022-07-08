@@ -4,8 +4,6 @@ import com.log.server.LocalConstants;
 
 public class RestSearchInput {
 
-	private static final long serialVersionUID = -4502884455691312086L;
-
 	private String logPathPatterns;
 
 	private String logFileNamePatterns;

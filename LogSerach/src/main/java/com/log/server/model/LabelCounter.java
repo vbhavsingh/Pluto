@@ -5,6 +5,17 @@ public class LabelCounter {
 	private String labelName;
 	
 	private int nodeCount;
+	
+
+	public LabelCounter() {
+		super();
+	}
+
+	public LabelCounter(String labelName, int nodeCount) {
+		super();
+		this.labelName = labelName;
+		this.nodeCount = nodeCount;
+	}
 
 	public String getLabelName() {
 		return labelName;

@@ -35,11 +35,12 @@ import com.log.server.model.NodeAgentViewModel;
 public class Utilities {
 
 	private static final Logger Log = Logger.getLogger(Utilities.class);
-	
-	public static String  getVerion(){
+
+	public static String getVerion() {
 		return Constants.VERSION;
 	}
-	public static String  getCharonVerion(){
+
+	public static String getCharonVerion() {
 		return Constants.CURRENT_AGENT_VERSION;
 	}
 
@@ -132,7 +133,8 @@ public class Utilities {
 		if (filesSearched > 1) {
 			msg = msg + filesSearched + " files were searched, but no match found. ";
 		}
-		msg = msg + "Due to restarctions all files can't be searched. Although " + totalFilesFound + " files matched the path/name pattern provided.";
+		msg = msg + "Due to restarctions all files can't be searched. Although " + totalFilesFound
+				+ " files matched the path/name pattern provided.";
 		msg = msg + " Try narrowing your search.";
 		return msg;
 	}
@@ -145,7 +147,8 @@ public class Utilities {
 			msg = msg + "Only one file with match found out of " + filesSelectedForSearch + " searched files. ";
 		}
 		if (filesSearched > 1 && filesSelectedForSearch > filesSearched) {
-			msg = msg + filesSearched + " files with match found out of " + filesSelectedForSearch + " selected files. ";
+			msg = msg + filesSearched + " files with match found out of " + filesSelectedForSearch
+					+ " selected files. ";
 		}
 		if (filesSearched == 1 && filesSelectedForSearch == filesSearched) {
 			msg = msg + "Only one file was searched. ";
@@ -154,7 +157,8 @@ public class Utilities {
 			msg = msg + filesSearched + " files were searched. ";
 		}
 		if (totalFilesFound > filesSelectedForSearch) {
-			msg = msg + "Due to restarctions all files can't be searched. Although " + totalFilesFound + " files matched the path/name pattern provided. ";
+			msg = msg + "Due to restarctions all files can't be searched. Although " + totalFilesFound
+					+ " files matched the path/name pattern provided. ";
 		}
 		if (filesSelectedForSearch > filesSearched) {
 			msg = msg + " Try narrowing your search, for more close results.";
@@ -177,13 +181,14 @@ public class Utilities {
 		if (LocalConstants.ERROR.SECURE_COMM_FAILED.equals(result.getErrorCode())) {
 			msg = msg + "There are encryption issues with agent communication. Have admin to look into it.";
 		}
-		if(LocalConstants.ERROR.UNDEFINED.equals(result.getErrorCode()) && (result.getResultList() == null || result.getResultList().size() == 0)){
+		if (LocalConstants.ERROR.UNDEFINED.equals(result.getErrorCode())
+				&& (result.getResultList() == null || result.getResultList().size() == 0)) {
 			msg = msg + " No match found for provided criteria.";
 		}
 		return msg;
 	}
 
-	public static String listToString(List list) {
+	public static String listToString(List<?> list) {
 		if (list == null || list.size() == 0) {
 			return "[]";
 		}
@@ -234,12 +239,14 @@ public class Utilities {
 		} else
 			return str.trim();
 	}
-	
-	public static String millisecondsToDate(long mills, String tz){
-		/*SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm:ss.SSS");
-		GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone(tz));
-		calendar.setTimeInMillis(mills);*/
-		DateTime jodaTime = new DateTime(mills,DateTimeZone.forTimeZone(TimeZone.getTimeZone(tz)));
+
+	public static String millisecondsToDate(long mills, String tz) {
+		/*
+		 * SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm:ss.SSS");
+		 * GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone(tz));
+		 * calendar.setTimeInMillis(mills);
+		 */
+		DateTime jodaTime = new DateTime(mills, DateTimeZone.forTimeZone(TimeZone.getTimeZone(tz)));
 		DateTimeFormatter parser = DateTimeFormat.forPattern("MM/dd/yy HH:mm:ss");
 		return parser.print(jodaTime);
 	}
@@ -277,7 +284,7 @@ public class Utilities {
 		String number = new DecimalFormat("#.##").format(d);
 		return number;
 	}
-	
+
 	/**
 	 * 
 	 * @param date
@@ -286,29 +293,27 @@ public class Utilities {
 	 * @param toTz
 	 * @return
 	 */
-	public static String covertDateToStringInTargetTz(String date,String dateFormat, String frmTz, String toTz) {
+	public static String covertDateToStringInTargetTz(String date, String dateFormat, String frmTz, String toTz) {
 		/*
-		 * Convert the time string into a string with valid timezone appeneded
-		 * to it
+		 * Convert the time string into a string with valid timezone appeneded to it
 		 */
-		if(toTz == null) {
+		if (toTz == null) {
 			toTz = frmTz;
 		}
-		
+
 		frmTz = Utilities.dayLightNormalizer(frmTz);
 		toTz = Utilities.dayLightNormalizer(toTz);
 
 		String fromDateTime = date + " " + DateTimeZone.forTimeZone(TimeZone.getTimeZone(frmTz));
 
-		DateTimeFormatter dtf = DateTimeFormat.forPattern(dateFormat+" ZZZ");
+		DateTimeFormatter dtf = DateTimeFormat.forPattern(dateFormat + " ZZZ");
 		DateTime origDate = new DateTime(dtf.parseDateTime(fromDateTime));
-		
-		DateTimeFormatter fmt = DateTimeFormat.forPattern(dateFormat);
+
 		DateTime dtToTz = origDate.withZone(DateTimeZone.forTimeZone(TimeZone.getTimeZone(toTz)));
 
 		return dtToTz.toString(dateFormat);
 	}
-	
+
 	/**
 	 * 
 	 * @param date
@@ -316,13 +321,14 @@ public class Utilities {
 	 * @param timezone
 	 * @return
 	 */
-	public static Date convertStringToTimeZonedDate(String date,String format,String timezone) {
-		timezone =  Utilities.dayLightNormalizer(timezone);
+	public static Date convertStringToTimeZonedDate(String date, String format, String timezone) {
+		timezone = Utilities.dayLightNormalizer(timezone);
 		date = date + " " + DateTimeZone.forTimeZone(TimeZone.getTimeZone(timezone));
-		DateTimeFormatter dtf = DateTimeFormat.forPattern(format+" ZZZ");
+		DateTimeFormatter dtf = DateTimeFormat.forPattern(format + " ZZZ");
 		DateTime tzDateTime = new DateTime(dtf.parseDateTime(date));
-		return  tzDateTime.toDate();
+		return tzDateTime.toDate();
 	}
+
 	/**
 	 * 
 	 * @param fromDate
@@ -330,11 +336,10 @@ public class Utilities {
 	 * @param toTz
 	 * @return
 	 */
-	public static  DateTime convertTimeZonesinJoda(Date fromDate, String frmTz, String toTz) {
+	public static DateTime convertTimeZonesinJoda(Date fromDate, String frmTz, String toTz) {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 		/*
-		 * Convert the time string into a string with valid timezone appeneded
-		 * to it
+		 * Convert the time string into a string with valid timezone appeneded to it
 		 */
 		frmTz = Utilities.dayLightNormalizer(frmTz);
 		toTz = Utilities.dayLightNormalizer(toTz);
@@ -342,12 +347,12 @@ public class Utilities {
 		String fromDateTime = df.format(fromDate) + " " + DateTimeZone.forTimeZone(TimeZone.getTimeZone(frmTz));
 
 		DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS ZZZ");
-		DateTimeFormatter fmt = DateTimeFormat.forPattern(LocalConstants.PRESENTATION_DATE_FORMAT);
 		DateTime origDate = new DateTime(dtf.parseDateTime(fromDateTime));
 		DateTime dtToTz = origDate.withZone(DateTimeZone.forTimeZone(TimeZone.getTimeZone(toTz)));
 
 		return dtToTz;
 	}
+
 	/**
 	 * 
 	 * @param eventDT
@@ -359,17 +364,18 @@ public class Utilities {
 		long eventMills = eventDT.getTime();
 		long startMills = startDT.getTime();
 		long endMills = endDT.getTime();
-		
-		if(eventMills >= startMills && eventMills <= endMills) {
+
+		if (eventMills >= startMills && eventMills <= endMills) {
 			return true;
 		}
 		return false;
 	}
+
 	/**
 	 * 
 	 * @return
 	 */
-	public static final List<String> getAllowedTimeZoneList(){
+	public static final List<String> getAllowedTimeZoneList() {
 		List<String> allowedTimeZoneList = new ArrayList<String>();
 		allowedTimeZoneList.add("EST");
 		allowedTimeZoneList.add("CST");

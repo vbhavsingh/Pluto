@@ -6,18 +6,18 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 public class AddEditUserModel {
 
-	private UserCredentials profile;
+	private UserCredentialsModel profile;
 
 	private List<Role> assignableRoles;
 
 	private List<Group> assignableGroups;
 	
 
-	public UserCredentials getProfile() {
+	public UserCredentialsModel getProfile() {
 		return profile;
 	}
 
-	public void setProfile(UserCredentials profile) {
+	public void setProfile(UserCredentialsModel profile) {
 		this.profile = profile;
 	}
 

@@ -32,10 +32,10 @@
 		<jdbc:script location="classpath:/hsqldb.sql" />
 	</jdbc:initialize-database>
 	
-	<tx:annotation-driven proxy-target-class="true" transaction-manager="txManager" />
+<!-- 	<tx:annotation-driven proxy-target-class="true" transaction-manager="txManager" />
 	
 	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="hsqlDataSource" />
-    </bean>
+    </bean> -->
 
 </beans>

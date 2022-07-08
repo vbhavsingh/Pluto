@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
  *
  * @author Vaibhav Singh
  */
-public class UserCredentials {
+public class UserCredentialsModel {
 
 	@NotEmpty(message = "Mandatory Field")
 	@Size(min = 5, max = 8, message = "User Name must be 5 to 6 charcters.")
@@ -35,14 +35,14 @@ public class UserCredentials {
 	private String role;
 	private String[] groups;
 	private List<String> myNodes;
-	private boolean robot;
+	private Boolean robot = false;
 
-	public UserCredentials(String username, String password) {
+	public UserCredentialsModel(String username, String password) {
 		this.username = username;
 		this.password = password;
 	}
 
-	public UserCredentials() {
+	public UserCredentialsModel() {
 	}
 
 	public String getUsername() {
@@ -134,11 +134,13 @@ public class UserCredentials {
 	}
 	
 
-	public boolean isRobot() {
+	public Boolean isRobot() {
+		if(this.robot == null)
+			return false;
 		return robot;
 	}
 
-	public void setRobot(boolean robot) {
+	public void setRobot(Boolean robot) {
 		this.robot = robot;
 	}
 

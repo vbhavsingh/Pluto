@@ -7,6 +7,7 @@ package com.log.server.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -28,6 +29,11 @@ public class Group {
 	private Date modifiedDate;
 	private String modifiedBy;
 	private List<String> users;
+	
+	public Group(@NotEmpty String name) {
+		super();
+		this.name = name;
+	}
 
 	public String getName() {
 		return name;
@@ -96,5 +102,27 @@ public class Group {
 	public String toString() {
 		return ReflectionToStringBuilder.toString(this);
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(createdBy, createdDate, description, modifiedBy, modifiedDate, name, oldName, users);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Group other = (Group) obj;
+		return Objects.equals(createdBy, other.createdBy) && Objects.equals(createdDate, other.createdDate)
+				&& Objects.equals(description, other.description) && Objects.equals(modifiedBy, other.modifiedBy)
+				&& Objects.equals(modifiedDate, other.modifiedDate) && Objects.equals(name, other.name)
+				&& Objects.equals(oldName, other.oldName) && Objects.equals(users, other.users);
+	}
+	
+	
 
 }
