@@ -74,6 +74,7 @@ public class AdminServices {
 	@Autowired
 	private CommonServices commonServices;
 
+
 	/**
 	 * 
 	 * @param node
@@ -460,6 +461,7 @@ public class AdminServices {
 				Patch2018 patch2018 = context.getBean(Patch2018.class);
 				patch2018.applyPatch(user);
 			}
+
 		}
 
 		if (Boolean.parseBoolean(System.getProperty(LocalConstants.KEYS.APPLY_PATCH))) {

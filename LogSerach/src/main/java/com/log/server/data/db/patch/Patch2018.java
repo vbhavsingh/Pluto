@@ -18,7 +18,6 @@ import com.log.server.data.db.service.UserRoleService;
 import com.log.server.model.UserCredentialsModel;
 
 @Component
-@ConditionalOnProperty(name = LocalConstants.KEYS.APPLY_PATCH, havingValue = "true")
 public class Patch2018 {
 
 	private static final Logger Log = LoggerFactory.getLogger(Patch2018.class);

@@ -1,8 +1,12 @@
-FROM tomcat:9.0-slim
+FROM openjdk:8-jdk-alpine
 LABEL maintainer="www.rationalminds.net"
-RUN rm -rf /usr/local/tomcat/webapps/
-ADD https://rationalminds.net/download/pluto/4.0/pluto.war /usr/local/tomcat/webapps/
-RUN mkdir /usr/local/tomcat/agents
-ADD https://rationalminds.net/download/envswitch/0.0.2/environment-switch-0.0.2-jar-with-dependencies.jar /usr/local/tomcat/agents
-ENV JAVA_OPTS="$JAVA_OPTS -javaagent:/usr/local/tomcat/agents/environment-switch-0.0.2-jar-with-dependencies.jar -Denv.switch=dev"
+RUN addgroup -S pluto && adduser -S pluto -G pluto -h /home/pluto
+USER root
+ADD http://rationalminds.net/download/pluto/5.0/pluto.war /home/pluto/
+ADD http://rationalminds.net/download/envswitch/0.0.2/environment-switch-0.0.2-jar-with-dependencies.jar /home/pluto
+RUN chmod 777 /home/pluto/pluto.war
+RUN chmod 777 /home/pluto/environment-switch-0.0.2-jar-with-dependencies.jar
+USER pluto:pluto
+ENTRYPOINT ["java","-jar","/home/pluto/pluto.war"]
 EXPOSE 8080
+
