@@ -44,8 +44,6 @@ public class DevEnvironmentMocker {
 		resultModel.setFilesFoundCount(10);
 		resultModel.setFilesSelectedCount(10);
 
-		NodalSearch target = (NodalSearch) object;
-		
 		Field fSearchModel = object.getClass().getDeclaredField("searchModel");
 		fSearchModel.setAccessible(true);	
 		SearchModel model = (SearchModel) fSearchModel.get(object);

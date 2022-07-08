@@ -3,7 +3,6 @@ package com.log.server;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -11,25 +10,23 @@ import javax.annotation.PreDestroy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ImportResource;
 
 import com.log.analyzer.commons.Commons;
 import com.log.analyzer.commons.Constants;
 import com.log.analyzer.commons.Util;
-import com.log.server.biz.CommonServices;
+import com.log.server.biz.AdminServices;
 
 @SpringBootConfiguration
 @SpringBootApplication(scanBasePackages = {
 		"com.log.server",
-		"com.log.server.data.db.dao",
+		"com.log.server.data.db",
 		"com.security.common"
 })
 @ImportResource({
@@ -39,6 +36,7 @@ import com.log.server.biz.CommonServices;
 public class Pluto extends SpringBootServletInitializer {
     
 	private final static Logger Log = LoggerFactory.getLogger(Pluto.class);
+	
 	
 	@Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
@@ -50,7 +48,8 @@ public class Pluto extends SpringBootServletInitializer {
     	ConfigurableApplicationContext context = SpringApplication.run(Pluto.class, args);    
     	
     	 try {
-         	((CommonServices)context.getBean("commonServices")).initializedDatabse();
+         	((AdminServices)context.getBean("adminServices")).initializeDataBase();
+         	
          }catch (Exception e) {
  			Log.error("db cannot be initialized, application exiting",e);
  			System.exit(100);

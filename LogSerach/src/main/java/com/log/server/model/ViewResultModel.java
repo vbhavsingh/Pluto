@@ -143,14 +143,14 @@ public class ViewResultModel implements Serializable{
     }
     
 
-	public List getAllowedTimeZoneList() {
+	public List<String> getAllowedTimeZoneList() {
         if (this.allowedTimeZoneList == null) {
             this.allowedTimeZoneList = Utilities.getAllowedTimeZoneList();
         }
         return allowedTimeZoneList;
     }
 
-    public void setAllowedTimeZoneList(List allowedTimeZoneList) {
+    public void setAllowedTimeZoneList(List<?> allowedTimeZoneList) {
         if (this.allowedTimeZoneList == null) {
             getAllowedTimeZoneList();
         }

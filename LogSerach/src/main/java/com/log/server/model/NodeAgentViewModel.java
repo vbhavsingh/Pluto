@@ -13,8 +13,6 @@ import javax.validation.constraints.Min;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import com.log.analyzer.commons.Constants;
-
 /**
  *
  * @author Vaibhav Singh

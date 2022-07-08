@@ -284,10 +284,10 @@ public class CipherService {
 	private static Object encryptDecryptMap(Object obj, String enKey, boolean decrypt) throws Exception {
 		if (obj == null)
 			return obj;
-		Map map = (Map) obj;
-		Set s = map.keySet();
-		Iterator i = s.iterator();
-		Map tempMap = (Map) Class.forName(obj.getClass().getName()).newInstance();
+		Map<?, ?> map = (Map<?, ?>) obj;
+		Set<?> s = map.keySet();
+		Iterator<?> i = s.iterator();
+		Map<Object, Object> tempMap = (Map<Object, Object>) Class.forName(obj.getClass().getName()).newInstance();
 		while (i.hasNext()) {
 			Object originalKey = i.next();
 			Object val = map.get(originalKey);
@@ -304,9 +304,9 @@ public class CipherService {
 		if (obj == null) {
 			return obj;
 		}
-		Collection c = (Collection) obj;
-		Iterator i = c.iterator();
-		Collection newCollection = (Collection) Class.forName(obj.getClass().getName()).newInstance();
+		Collection<?> c = (Collection<?>) obj;
+		Iterator<?> i = c.iterator();
+		Collection<Object> newCollection = (Collection<Object>) Class.forName(obj.getClass().getName()).newInstance();
 		while (i.hasNext()) {
 			Object original = i.next();
 			Object encypted = encryptDecryptObject(original, enKey, decrypt);

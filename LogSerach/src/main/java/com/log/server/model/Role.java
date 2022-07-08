@@ -7,6 +7,8 @@ package com.log.server.model;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
+import com.log.server.LocalConstants;
+
 /**
  *
  * @author Vaibhav Singh
@@ -22,6 +24,11 @@ public class Role {
     public Role() {
 		super();
 	}
+    
+    public Role(LocalConstants.ROLE.ROLES role) {
+        this.rolename = role.roleName;
+        this.description = role.description;
+    }
 
 	public Role(String rolename, String tooltip) {
         this.rolename = rolename;
