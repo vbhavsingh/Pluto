@@ -11,7 +11,9 @@ import java.lang.reflect.Field;
 
 import javax.ws.rs.core.MultivaluedMap;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 /**
  *
@@ -19,7 +21,7 @@ import org.apache.log4j.Logger;
  */
 public class Util {
 
-    private static final Logger Log = Logger.getLogger(Util.class);
+    private static final Logger Log = LogManager.getLogger(Util.class);
     
     public static String getLinesFromArchiveFilePosixCmd(String osName) {
     	String archiveReadCmd = "";

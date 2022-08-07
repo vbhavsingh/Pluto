@@ -12,7 +12,8 @@ import com.google.common.collect.Lists;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import org.apache.log4j.Level;
+import org.apache.logging.log4j.Level;
+
 
 /**
  *

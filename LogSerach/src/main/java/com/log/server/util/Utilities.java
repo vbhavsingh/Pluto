@@ -15,7 +15,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
@@ -34,7 +35,7 @@ import com.log.server.model.NodeAgentViewModel;
  */
 public class Utilities {
 
-	private static final Logger Log = Logger.getLogger(Utilities.class);
+	private static final Logger Log = LogManager.getLogger(Utilities.class);
 
 	public static String getVerion() {
 		return Constants.VERSION;

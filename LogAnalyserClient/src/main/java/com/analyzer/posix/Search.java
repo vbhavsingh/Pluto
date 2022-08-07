@@ -17,7 +17,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.analyzer.LocalUtil;
 import com.analyzer.commons.ClientFileModel;
@@ -40,7 +41,7 @@ import net.rationalminds.util.RegexPatternMaker;
  */
 public class Search {
 
-	private final static Logger Log = Logger.getLogger(Search.class);
+	private final static Logger Log = LogManager.getLogger(Search.class);
 	private static final ExecutorService executor = Executors.newFixedThreadPool(100);
 	private static int timeout = 20;
 

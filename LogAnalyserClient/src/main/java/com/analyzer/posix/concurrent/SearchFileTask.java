@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.analyzer.commons.ClientFileModel;
 import com.analyzer.commons.LocalConstants;
@@ -22,7 +23,7 @@ import com.analyzer.commons.SystemStreamCapture;
  */
 public class SearchFileTask implements Callable<ClientFileModel> {
 
-	private final static Logger Log = Logger.getLogger(SearchFileTask.class);
+	private final static Logger Log = LogManager.getLogger(SearchFileTask.class);
 	String command;
 	AtomicLong resultSize;
 	String absFileName;

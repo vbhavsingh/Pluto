@@ -5,7 +5,8 @@ import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,15 +22,15 @@ import com.log.analyzer.commons.Messages;
 import com.log.analyzer.commons.err.CommonErrorModel;
 import com.log.analyzer.commons.model.AgentConfigurationModel;
 import com.log.analyzer.commons.model.AgentTerminatorRequestModel;
-import com.log.analyzer.commons.model.FileLineRequestModel;
 import com.log.analyzer.commons.model.FileLineClientResultModel;
+import com.log.analyzer.commons.model.FileLineRequestModel;
 import com.log.analyzer.commons.model.SearchModel;
 import com.log.analyzer.commons.model.SearchResultModel;
 
 @RestController
 public class ControllerServices {
 
-	private static final Logger Log = Logger.getLogger(ControllerServices.class);
+	private static final Logger Log = LogManager.getLogger(ControllerServices.class);
 
 	/**
 	 * 

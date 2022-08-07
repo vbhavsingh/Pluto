@@ -41,7 +41,7 @@ public class DataSourceConfiguration {
         HashMap<String, Object> properties = new HashMap<>();
 
         properties.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
-        properties.put("hibernate.show-sql", true);
+        properties.put("hibernate.show-sql", false);
         properties.put("hbm2ddl.auto", "create");
  //       properties.put("hibernate.initialize-database", "always");
 
@@ -54,10 +54,6 @@ public class DataSourceConfiguration {
     @Bean
     DataSource hsdbDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//		dataSource.setDriverClassName(env.getProperty("spring.datasource.driverClassName"));
-//		dataSource.setUrl(env.getProperty("spring.datasource.url"));
-//		dataSource.setUsername(env.getProperty("spring.datasource.username"));
-//		dataSource.setPassword(env.getProperty("spring.datasource.password"));
         dataSource.setDriverClassName("org.hsqldb.jdbcDriver");
         dataSource.setUrl("jdbc:hsqldb:file:~/.pluto/db/configuration;shutdown=true;hsqldb.log_size=10");
         dataSource.setUsername("");

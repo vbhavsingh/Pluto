@@ -11,7 +11,8 @@ import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -34,7 +35,7 @@ import com.log.analyzer.commons.model.AgentConfigurationModel;
  */
 public class HeartBeatMonitor implements Job {
 
-	private static final Logger Log = Logger.getLogger(HeartBeatMonitor.class);
+	private static final Logger Log = LogManager.getLogger(HeartBeatMonitor.class);
 
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		Log.debug("Sending heartbeat signal to master");

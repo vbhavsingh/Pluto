@@ -11,10 +11,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -32,7 +32,7 @@ public class SystemStreamCapture extends Thread {
 
 	List<String> buffer;
 
-	private final static Logger Log = Logger.getLogger(SystemStreamCapture.class);
+	private final static Logger Log = LogManager.getLogger(SystemStreamCapture.class);
 
 	public SystemStreamCapture(InputStream is, String type) {
 		this.is = is;

@@ -13,6 +13,7 @@ import java.util.List;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.http.HttpSessionEvent;
 
+import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +35,7 @@ public class ApplicationLifecycleListener {
     	// set the log level if present in arguments
     	if(Util.isValidLogLevel(System.getProperty(Constants.LOG_LEVEL))){
     		String level = System.getProperty(Constants.LOG_LEVEL);
-    		org.apache.log4j.Logger.getRootLogger().setLevel(Commons.getLogLevel(level));
+    		LogManager.getRootLogger().atLevel(Commons.getLogLevel(level));
     		Log.info("log level set to :"+ level);
     	}
     	

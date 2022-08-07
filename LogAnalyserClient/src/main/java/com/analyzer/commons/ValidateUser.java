@@ -7,7 +7,8 @@ package com.analyzer.commons;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.log.analyzer.commons.Constants;
 import com.log.analyzer.commons.model.FileLineRequestModel;
@@ -19,7 +20,7 @@ import com.log.analyzer.commons.model.SearchModel;
  */
 public class ValidateUser {
 
-	private final static Logger Log = Logger.getLogger(ValidateUser.class);
+	private final static Logger Log = LogManager.getLogger(ValidateUser.class);
 	
 	public static boolean isUserValid(FileLineRequestModel model) throws Exception {
 		if (model.getUserName() == null && "".equals(model.getUserName().trim())) {

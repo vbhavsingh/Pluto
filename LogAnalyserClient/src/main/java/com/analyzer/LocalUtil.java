@@ -24,7 +24,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.analyzer.commons.FileIndexModel;
 import com.analyzer.commons.LocalConstants;
@@ -46,7 +47,7 @@ import net.rationalminds.util.TextFileUtility;
  */
 public class LocalUtil {
 
-	private static final Logger Log = Logger.getLogger(LocalUtil.class);
+	private static final Logger Log = LogManager.getLogger(LocalUtil.class);
 	
 	public static boolean consoleLoggingEnabled() {
 		String op = System.getProperty(LocalConstants.CONSOLE_OUTPUT);

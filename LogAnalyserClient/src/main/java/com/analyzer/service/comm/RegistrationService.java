@@ -7,7 +7,8 @@ package com.analyzer.service.comm;
 
 import javax.ws.rs.core.MultivaluedMap;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.analyzer.LocalUtil;
 import com.google.gson.Gson;
@@ -25,7 +26,7 @@ import com.sun.jersey.api.client.WebResource;
  */
 public class RegistrationService {
 
-    public final static Logger Log = Logger.getLogger(RegistrationService.class);
+    public final static Logger Log = LogManager.getLogger(RegistrationService.class);
 
     public String registerAgent() {
         Client c = Client.create();

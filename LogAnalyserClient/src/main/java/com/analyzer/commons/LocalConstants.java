@@ -8,7 +8,8 @@ package com.analyzer.commons;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.log.analyzer.commons.Constants;
 
@@ -18,9 +19,9 @@ import com.log.analyzer.commons.Constants;
  */
 public class LocalConstants {
 	
-	public static final Logger SECURITY_LOGGER = Logger.getLogger("security");
+	public static final Logger SECURITY_LOGGER = LogManager.getLogger("security");
 	
-	public static final Logger ACCESS_LOGGER = Logger.getLogger("access");
+	public static final Logger ACCESS_LOGGER = LogManager.getLogger("access");
 
     public static final String AGENT_NAME = "log.agent.name";
 

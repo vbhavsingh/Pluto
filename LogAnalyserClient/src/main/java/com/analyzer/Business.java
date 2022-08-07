@@ -3,7 +3,8 @@ package com.analyzer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 
 import com.analyzer.commons.KillThread;
@@ -24,7 +25,7 @@ import com.log.analyzer.commons.model.SecureInterface;
 
 public class Business {
 
-	private static final Logger Log = Logger.getLogger(Business.class);
+	private static final Logger Log = LogManager.getLogger(Business.class);
 
 	public FileLineClientResultModel getLinesFromFile(FileLineRequestModel request) {
 		securityVerification(request);

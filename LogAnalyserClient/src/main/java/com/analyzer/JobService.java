@@ -5,7 +5,8 @@
  */
 package com.analyzer;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
@@ -24,7 +25,7 @@ import com.log.analyzer.commons.Constants;
  */
 public class JobService {
 
-    private final static Logger Log = Logger.getLogger(JobService.class);
+    private final static Logger Log = LogManager.getLogger(JobService.class);
     private final static SchedulerFactory schFactory = new StdSchedulerFactory();
 
     public JobService() {

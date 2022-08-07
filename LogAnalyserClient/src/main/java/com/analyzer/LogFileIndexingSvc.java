@@ -5,7 +5,8 @@
  */
 package com.analyzer;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -18,7 +19,7 @@ import com.analyzer.posix.LogFileNameFinder;
  */
 public class LogFileIndexingSvc implements Job {
 
-    private static final Logger Log = Logger.getLogger(LogFileIndexingSvc.class);
+    private static final Logger Log = LogManager.getLogger(LogFileIndexingSvc.class);
 
     @Override
     public void execute(JobExecutionContext jec) throws JobExecutionException {

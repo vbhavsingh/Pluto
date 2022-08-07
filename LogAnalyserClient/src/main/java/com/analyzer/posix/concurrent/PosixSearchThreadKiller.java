@@ -3,13 +3,14 @@ package com.analyzer.posix.concurrent;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.analyzer.commons.LocalConstants;
 
 public class PosixSearchThreadKiller extends Thread {
 
-	private final static Logger Log = Logger.getLogger(PosixSearchThreadKiller.class);
+	private final static Logger Log = LogManager.getLogger(PosixSearchThreadKiller.class);
 
 	private static PosixSearchThreadKiller deathFactory;
 

@@ -12,7 +12,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.analyzer.LocalUtil;
 
@@ -25,7 +26,7 @@ public class CustomConcurrentMap extends ConcurrentHashMap<String, List<FileInde
     
 	private static final long serialVersionUID = 1L;
 	
-	private static Logger Log = Logger.getLogger(CustomConcurrentMap.class);
+	private static Logger Log = LogManager.getLogger(CustomConcurrentMap.class);
 
 	public Map<String, List<FileIndexModel>> getMatchingPathMap(String path) {
         Pattern pattern = Pattern.compile(path.toLowerCase());

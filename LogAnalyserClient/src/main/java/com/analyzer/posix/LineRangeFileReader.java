@@ -7,16 +7,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.analyzer.commons.LocalConstants;
 import com.analyzer.commons.SystemStreamCapture;
-import com.log.analyzer.commons.model.FileLineRequestModel;
 import com.log.analyzer.commons.model.FileLineClientResultModel;
+import com.log.analyzer.commons.model.FileLineRequestModel;
 
 public class LineRangeFileReader {
 
-	private final static Logger Log = Logger.getLogger(LineRangeFileReader.class);
+	private final static Logger Log = LogManager.getLogger(LineRangeFileReader.class);
 
 	public FileLineClientResultModel readLines(FileLineRequestModel request) throws IOException {
 		String[] script = { "/bin/sh", "-c", request.getCommand() };
