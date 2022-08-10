@@ -1,4 +1,5 @@
 /*
+
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -19,9 +20,9 @@ public class Constants {
 
 	public static final String LOG_ON_CONSOLE = "log.console";
 
-	public static final String VERSION = "5.0";
+	public static final String VERSION = "6.0";
 
-	public static final String CURRENT_AGENT_VERSION = "5.0";
+	public static final String CURRENT_AGENT_VERSION = "6.0";
 
 	public static final String fileTypesArg = "com.log.filetype";
 

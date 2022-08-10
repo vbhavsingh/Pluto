@@ -453,16 +453,17 @@ public class AdminServices {
 				throw e;
 			}
 		}
+		boolean applyPatch = Boolean.parseBoolean(System.getProperty(LocalConstants.KEYS.APPLY_PATCH)) & LocalConstants.DATABASES.isHsqlDB();
 		if (!roleService.isRoboRolePresent()) {
 			UserCredentialsModel user = new UserCredentialsModel(LocalConstants.USER_DEFAULTS.USERNAME,
 					LocalConstants.USER_DEFAULTS.PASSWORD);
-			if (Boolean.parseBoolean(System.getProperty(LocalConstants.KEYS.APPLY_PATCH))) {
+			if (applyPatch) {
 				Patch2018 patch2018 = context.getBean(Patch2018.class);
 				patch2018.applyPatch(user);
 			}
 		}
 
-		if (Boolean.parseBoolean(System.getProperty(LocalConstants.KEYS.APPLY_PATCH))) {
+		if (applyPatch) {
 			PatchAugust2021 patch2021 = context.getBean(PatchAugust2021.class);
 			patch2021.applyPatch();
 		}

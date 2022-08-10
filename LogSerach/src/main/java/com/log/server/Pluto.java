@@ -2,7 +2,6 @@ package com.log.server;
 
 import java.io.File;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -23,6 +22,7 @@ import com.log.analyzer.commons.Commons;
 import com.log.analyzer.commons.Constants;
 import com.log.analyzer.commons.Util;
 import com.log.server.biz.AdminServices;
+import com.log.server.util.Utilities;
 
 @SpringBootConfiguration
 @SpringBootApplication(scanBasePackages = {
@@ -68,7 +68,7 @@ public class Pluto extends SpringBootServletInitializer {
     	
     	Log.info("Current Pluto version : {}, Current charon version: {}",Constants.VERSION,Constants.CURRENT_AGENT_VERSION);
         Log.info("initializing database");
-        Path path=Paths.get(System.getProperty("user.home"),".pluto/db","configuration.lck");
+        Path path=Utilities.getEmbededDBLockFilePath();
         File file=new File(path.toUri());
         Log.info("destroying any lock on database, due to bad shutdown at: "+file.getAbsolutePath());
         if(file.exists()){

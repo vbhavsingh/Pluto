@@ -16,6 +16,8 @@ import java.util.concurrent.Executors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.log.server.util.Utilities;
+
 /**
  *
  * @author Vaibhav Pratap Singh
@@ -87,144 +89,15 @@ public class LocalConstants {
 		public static final String BAD_SEARCH_PARAMETERS = "BAD-SEARCH-PARAMS";
 	}
 
-    public static final class SQL {
-    
+	public static final class SQL {
 
-//        public static final String UPDATE_AGENTS = "UPDATE AGENTS "
-//                + "SET NODE_PORT=?, "
-//                + "NODE_TZ=?, "
-//                + "LAST_MODIFIED=?, "
-//                + "AGENT_VERSION=? "
-//                + "WHERE NODE_NAME=?";
-//        
-//        public static final String INSERT_AGENT = "INSERT INTO AGENTS "
-//                + "(NODE_NAME,AGENT_NAME,COMM_KEY,OS_TYPE,AGENT_VERSION,NODE_PORT,PARRALEL,NODE_TZ,MAX_FILES_TO_SEARCH,"
-//                + "MAX_LINES_PER_FILE,MAX_LINES_IN_RESULT,RESULT_SIZE_KB,"
-//                + "LAST_MODIFIED,LAST_HEARTBEAT) "
-//                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-//        
-//        public static final String UPDATE_NODE_AGENT="UPDATE AGENTS SET AGENT_NAME=?,"
-//        		+ "PARRALEL=?,"
-//        		+ "MAX_FILES_TO_SEARCH=?,"
-//        		+ "MAX_LINES_PER_FILE=?,"
-//        		+ "MAX_LINES_IN_RESULT=?,"
-//        		+ "RESULT_SIZE_KB=?,"
-//        		+ "LAST_MODIFIED=? "
-//        		+ "WHERE NODE_NAME=?";
-//
-//        public static final String HEARTBEAT = "UPDATE AGENTS "
-//                + "SET LAST_HEARTBEAT=? "
-//                + "WHERE NODE_NAME=?";
-//
-//        public static final String LABEL_INSERT = "INSERT INTO LABELS "
-//                + "(NODE_NAME,LABEL_NAME) "
-//                + "VALUES (?,?)";
-//        
-//        public static final String LABEL_DELETE = "DELETE FROM LABELS "
-//                + "WHERE NODE_NAME=? AND "
-//                + "LABEL_NAME=?";
-//
-//        public static final String GET_ALL_USER_PROFILES="SELECT * FROM CREDENTIALS_USER";
-//        
-//        public static final String USER_INSERT = "INSERT INTO CREDENTIALS_USER "
-//                + "(USERNAME,PASSWORD,EMAIL,FIRST_NAME,LAST_NAME,CREATED_BY,CREATED_TIME,LAST_MODIFIED) "
-//                + "VALUES (?,?,?,?,?,?,?,?)";
-//        
-//        public static final String USER_PROFILE_AND_PASSWORD = "UPDATE CREDENTIALS_USER SET "
-//        		+ "PASSWORD=?,"
-//        		+ "EMAIL=?,"
-//        		+ "FIRST_NAME=?,"
-//        		+ "LAST_NAME=?,"
-//        		+ "LAST_MODIFIED=? "
-//        		+ "WHERE USERNAME=?";
-//        
-//        public static final String USER_PROFILE = "UPDATE CREDENTIALS_USER SET "
-//        		+ "EMAIL=?,"
-//        		+ "FIRST_NAME=?,"
-//        		+ "LAST_NAME=?,"
-//        		+ "LAST_MODIFIED=? "
-//        		+ "WHERE USERNAME=?";
-//
-//        public static final String ROLE_INSERT = "INSERT INTO CREDENTIALS_ROLE "
-//                + "(ROLENAME,DESCRIPTION) "
-//                + "VALUES (?,?)";
-        
-        public static final String ROLE_INSERT_PATCH_JULY2018 = "INSERT INTO CREDENTIALS_ROLE "
-                + "(ROLENAME,DESCRIPTION,VISIBLE) "
-                + "VALUES (?,?,?)";
+		public static final String ROLE_INSERT_PATCH_JULY2018 = "INSERT INTO CREDENTIALS_ROLE "
+				+ "(ROLENAME,DESCRIPTION,VISIBLE) " + "VALUES (?,?,?)";
 
-//        public static final String GROUP_INSERT = "INSERT INTO CREDENTIALS_GROUP "
-//                + "(GROUPNAME,DESCRIPTION,CREATED_BY,CREATED_TIME) "
-//                + "VALUES (?,?,?,?)";
-//
-//        public static final String USER_ROLE_MAP_INSERT = "INSERT INTO USER_ROLE_MAP "
-//                + "(USERNAME,ROLENAME,CREATED_BY,CREATED_TIME) "
-//                + "VALUES (?,?,?,?)";
-//
-//        public static final String USER_NODE_MAP_INSERT = "INSERT INTO USER_NODE_MAP "
-//                + "(USERNAME,NODE_NAME,CREATED_BY,CREATED_TIME) "
-//                + "VALUES (?,?,?,?)";
-//
-//        public static final String USER_GROUP_MAP_INSERT = "INSERT INTO USER_GROUP_MAP "
-//                + "(USERNAME,GROUPNAME,CREATED_BY,CREATED_TIME) "
-//                + "VALUES (?,?,?,?)";
-//
-//        public static final String GET_ROLE_FOR_USER = "SELECT ROLENAME FROM USER_ROLE_MAP WHERE USERNAME=?";
-//
-//        public static final String GET_NODE_FOR_USER = "SELECT A.NODE_NAME,A.AGENT_NAME,"
-//                + "A.NODE_PORT,A.PARRALEL,A.NODE_TZ,A.MAX_FILES_TO_SEARCH,"
-//                + "A.MAX_LINES_PER_FILE,A.MAX_LINES_IN_RESULT,A.RESULT_SIZE_KB,"
-//                + "A.LAST_MODIFIED,A.LAST_HEARTBEAT "
-//                + "FROM AGENTS A, USER_NODE_MAP M  "
-//                + "WHERE A.AGENT_NAME = M.NODE_NAME "
-//                + "AND M.USERNAME=?";
-//        
-//        public static final String GET_NODE_FOR_MULTIPLE_USERS = "SELECT A.NODE_NAME,A.AGENT_NAME,"
-//                + "A.NODE_PORT,A.PARRALEL,A.NODE_TZ,A.MAX_FILES_TO_SEARCH,"
-//                + "A.MAX_LINES_PER_FILE,A.MAX_LINES_IN_RESULT,A.RESULT_SIZE_KB,"
-//                + "A.LAST_MODIFIED,A.LAST_HEARTBEAT "
-//                + "FROM AGENTS A, USER_NODE_MAP M  "
-//                + "WHERE A.AGENT_NAME = M.NODE_NAME "
-//                + "AND M.USERNAME IN ";
-//        
-//        public static final String ASSIGNED_ROLE_FOR_USER="SELECT R.ROLENAME,R.DESCRIPTION,R.VISIBLE "
-//        		+ "FROM CREDENTIALS_ROLE R, USER_ROLE_MAP U "
-//        		+ "WHERE U.ROLENAME=R.ROLENAME "
-//        		+ "AND U.USERNAME=?";
-//        
-//        public static final String ASSIGNED_GROUPS_FOR_USER="SELECT G.GROUPNAME, G.DESCRIPTION "
-//        		+ "G.CREATED_BY, G.CREATED_TIME, G.MODIFIED_BY, G.LAST_MODIFIED "
-//        		+ "FROM USER_GROUP_MAP U,CREDENTIALS_GROUP G "
-//        		+ "WHERE U.GROUPNAME = G.GROUPNAME "
-//        		+ "AND U.USERNAME=?";
-//        
-//        public static final String GET_USER_PROFILE="SELECT * FROM CREDENTIALS_USER WHERE USERNAME=?";
-//        
-//        public static final String UPDATE_CREDENTIALS_GROUP="UPDATE CREDENTIALS_GROUP SET GROUPNAME=?,"
-//        		+ "DESCRIPTION=?,"
-//        		+ "MODIFIED_BY=?,"
-//        		+ "LAST_MODIFIED=? "
-//        		+ "WHERE GROUPNAME=?";
-//        
-//        public static final String CREATE_CONFIG= "INSERT INTO CONFIG (CFGID,VAL) VALUES (?,?)";
-//        
-//        public static final String UPDATE_CONFIG= "UPDATE CONFIG SET VAL=? WHERE CFGID=?";
-//        
-//        public static final String INSERT_AUTO_POPULATE_KEYWORD="INSERT INTO SEARCH_ASSISTANT(FIELD,KEYTEXT,FREQUENCY,USERNAME,CREATED_TIME) VALUES (?,?,?,?,?)";
-//        
-//        public static final String UPDATE_FRQUENCY_OF_AUTO_POPULATE="UPDATE SEARCH_ASSISTANT SET FREQUENCY=FREQUENCY+1 WHERE LOWER(FIELD)=LOWER(?) AND LOWER(KEYTEXT)=LOWER(?)";
-//        
-//        public static final String GET_AUTOPOPULATE_KWS="SELECT FIELD,KEYTEXT,FREQUENCY FROM SEARCH_ASSISTANT WHERE FIELD=?";
-//        
-//        public static final String AUTOPOPULATE_EXISTS="SELECT COUNT(*) FROM SEARCH_ASSISTANT WHERE LOWER(FIELD)=LOWER(?) AND LOWER(KEYTEXT)=LOWER(?)";
-
-    }
+	}
 
 	public static final class ROLE {
 
-//        public static final String ADMIN = "ADMIN";
-//        public static final String GROUP_ADMIN = "GROUP-ADMIN";
-//        public static final String GROUP_MEMBER = "GROUP-MEMBER";
 		public static final String BOT = "ROBOT";
 
 		public static enum ROLES {
@@ -259,9 +132,6 @@ public class LocalConstants {
 			}
 		}
 
-//        public static final String ADMIN_DESC = "System admin, can create groups, group members and assign roles";
-//        public static final String GROUP_ADMIN_DESC = "Group admin, can create group members and assign roles";
-//        public static final String GROUP_MEMBER_DESC = "Group members just can use the search and have no admin privilege";
 		public static final String BOT_DESC = "user with bot role can use rest services";
 	}
 
@@ -272,4 +142,65 @@ public class LocalConstants {
 		public static final String EMAIL = "admin@delete.me";
 		public static final String NAME = "Admin";
 	}
+
+	public static final class PROPERTIES {
+		public static final String EMBEDED_DB_FILE_PATH = "db.file";
+		public static final String DB_CONNECTION_STRING = "db.connection";
+		public static final String DB_USERNAME = "db.user";
+		public static final String DB_PASSWORD = "db.password";
+		public static final String DB_TYPE = "db.type";
+		public static final String DB_URL = "db.url";
+	}
+
+	public static enum DATABASES {
+		oracle("org.hibernate.dialect.OracleDialect", "oracle.jdbc.driver.OracleDriver"),
+		mysql("org.hibernate.dialect.MySQLDialect", "com.mysql.jdbc.Driver"),
+		mssql("org.hibernate.dialect.SQLServerDialect", "com.microsoft.sqlserver.jdbc.SQLServerDriver"),
+		postgres("org.hibernate.dialect.PostgreSQLDialect", "org.postgresql.Driver"),
+		mariadb("org.hibernate.dialect.MariaDBDialect", "org.mariadb.jdbc.Driver"),
+		hsql("org.hibernate.dialect.HSQLDialect", "org.hsqldb.jdbcDriver");
+
+		private static final Map<String, DATABASES> MAP = new HashMap<>();
+
+		static {
+			for (DATABASES db : values()) {
+				MAP.put(db.name(), db);
+			}
+		}
+
+		DATABASES(String hibernateDialect, String driverClass) {
+			this.hibernateDialect = hibernateDialect;
+			this.driverClass = driverClass;
+		}
+
+		public final String hibernateDialect;
+		public final String driverClass;
+
+		public static String getDialect() {
+			String dbName = Utilities.getProperty(PROPERTIES.DB_TYPE);
+			dbName = dbName == null ? hsql.name() : dbName;
+			DATABASES db = MAP.get(dbName);
+			if (db != null) {
+				return db.hibernateDialect;
+			}
+			return null;
+		}
+
+		public static String getDriverName() {
+			String dbName = Utilities.getProperty(PROPERTIES.DB_TYPE);
+			dbName = dbName == null ? hsql.name() : dbName;
+			DATABASES db = MAP.get(dbName);
+			if (db != null) {
+				return db.driverClass;
+			}
+			return null;
+		}
+
+		public static boolean isHsqlDB() {
+			String dbName = Utilities.getProperty(PROPERTIES.DB_TYPE);
+			dbName = dbName == null ? hsql.name() : dbName;
+			return dbName.equals(hsql.name());
+		}
+	}
+
 }

@@ -6,7 +6,7 @@
 	<groupId>net.rationalminds</groupId>
 	<artifactId>pluto</artifactId>
 	<!-- Also use same version in net.rationalminds.util.Constants.Version -->
-	<version>5.0</version>
+	<version>6.0</version>
 	<packaging>war</packaging>
 
 	<name>pluto</name>
@@ -15,8 +15,8 @@
 		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.security.version>5.5.1</spring.security.version>
-		<pluto.commons.version>5.0</pluto.commons.version>
-		<pluto.charon.version>5.0</pluto.charon.version>
+		<pluto.commons.version>6.0</pluto.commons.version>
+		<pluto.charon.version>6.0</pluto.charon.version>
 		<rationalminds.dateparser.version>1.4</rationalminds.dateparser.version>
 		<log4j.version>2.18.0</log4j.version>
 		<build.by>rationalminds</build.by>
@@ -115,10 +115,6 @@
 			<version>8.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-dbcp2</artifactId>
 		</dependency>
@@ -166,6 +162,21 @@
 			<artifactId>jsf-impl</artifactId>
 			<version>2.2.20</version>
 		</dependency>
+
+		<!-- Database Drivers -->
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+		<!-- Database Drivers -->
 
 	</dependencies>
 

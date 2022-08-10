@@ -6,6 +6,8 @@
 package com.log.server.util;
 
 import java.net.InetAddress;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -370,6 +372,29 @@ public class Utilities {
 			return true;
 		}
 		return false;
+	}
+
+	public static String getProperty(String key) {
+		if (System.getProperty(key) != null) {
+			return System.getProperty(key);
+		}
+		if (System.getenv(key) != null) {
+			return System.getenv(key);
+		}
+		return null;
+	}
+
+	public static Path getEmbededDbFilePath() {
+		if (getProperty(LocalConstants.PROPERTIES.EMBEDED_DB_FILE_PATH) == null) {
+			return Paths.get(System.getProperty("user.home"), ".pluto","db","configuration");
+		} else {
+			return Paths.get(System.getProperty(LocalConstants.PROPERTIES.EMBEDED_DB_FILE_PATH));
+		}
+	}
+
+	public static Path getEmbededDBLockFilePath() {
+		Path dbPath = getEmbededDbFilePath();
+		return Paths.get(dbPath.toString(), "configuration.lck");
 	}
 
 	/**
