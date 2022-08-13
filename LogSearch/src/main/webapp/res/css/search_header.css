@@ -1,0 +1,138 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 20, 2015, 9:36:23 AM
+    Author     : Vaibhav Singh
+*/
+span{
+	padding-left: 5px;
+}
+._search_header{
+	background-color: rgb(230, 242, 255);
+	outline: #B0DAFC solid 1px;
+	top: 32px;
+	position: fixed;
+	width: 100%;
+	font-size: 12px;
+	max-height: 72px;
+	min-height: 72px;
+	padding-top:4px;]
+	left: 0;
+	z-index: 0;
+}
+._table_div_btn_header
+{
+    display: table-cell;
+    width: 100px;
+    height: 100%;
+    box-sizing: border-box;
+    height: 10px;
+    overflow: hidden;
+    padding: 2px 0px 0;
+    outline: medium none;
+    padding-left: -500px;
+}
+
+._table_div_textbox_header
+{
+    display: table-cell;
+    width: 300px;
+    height: 100%;
+    box-sizing: border-box;
+    height: 10px;
+    overflow: hidden;
+    padding: 5px 9px 0;
+    outline: medium none;
+}
+._table_div_textbox_time_header
+{
+    width: 160px;
+}
+._div_textbox_header
+{
+    display: inline;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    height: 10px;
+    overflow: hidden;
+    padding: 2px 1px 3px 5px;
+    outline: 1px solid #D6D6D6;
+    background-color: #ffffff;
+}
+._div_textbox_header:hover
+{
+    outline: 1px solid #4EACDF;
+}
+._textbox_header {
+    border: medium none; 
+    height: auto; width: 95%;
+    outline: #ffffff none;
+}
+._submit_result_header {
+    background: #eff4f7;
+    background-image: -webkit-linear-gradient(top, #eff4f7, #D6D6D6);
+    background-image: -moz-linear-gradient(top, #eff4f7, #D6D6D6);
+    background-image: -ms-linear-gradient(top, #eff4f7, #D6D6D6);
+    background-image: -o-linear-gradient(top, #eff4f7, #D6D6D6);
+    background-image: linear-gradient(to bottom, #eff4f7, #D6D6D6);
+    -webkit-border-radius: 4;
+    -moz-border-radius: 4;
+    border-radius: 4px;
+    font-family: Arial;
+    color: #63686b;
+    font-size: 13px;
+    padding: 6px 20px 6px 20px;
+    border: solid #D6D6D6 1px;
+    text-decoration: none;
+}
+
+._submit_result_header:hover {
+    background: #D6D6D6;
+    background-image: -webkit-linear-gradient(top, #D6D6D6, #eff4f7);
+    background-image: -moz-linear-gradient(top, #D6D6D6, #eff4f7);
+    background-image: -ms-linear-gradient(top, #D6D6D6, #eff4f7);
+    background-image: -o-linear-gradient(top, #D6D6D6, #eff4f7);
+    background-image: linear-gradient(to bottom, #D6D6D6, #eff4f7);
+    text-decoration: none;
+    font-family: Arial;
+    color: #4EACDF;
+    font-size: 13px;
+    border: solid #4EACDF 1px;
+}
+
+
+._table_header
+{
+    display: table;
+    margin:0px;padding:0px;
+    width:100%;
+}
+
+._table_div_row_header
+{
+    display: table-row;
+    height: 30px;
+    width: 100%;
+}
+
+._table_div_label_header
+{
+    display: table-cell;
+    width: 130px;
+    padding: 2px 5px 2px 5px;
+    color:#63686b;
+    font-size:12px;
+    text-align:left;
+    font-family:arial black, serif;
+    font-style: normal;
+    font-weight:normal !important;
+    font-stretch: wider;
+}
+._table_div_label_time_header
+{
+    width: 80px;
+}

@@ -1,0 +1,215 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 5, 2015, 9:54:19 AM
+    Author     : Vaibhav Singh
+*/
+.popover-file-path {
+	 min-width: 300px  !important;
+     max-width: 400px !important;
+   }
+#_container {
+	position: fixed;
+	top: 80px;
+	left: 60px;
+	width: 90%;
+	outline: #99CCFF dashed thin;
+	padding: 5px 10px 5px 10px;
+	background-image: url('../img/graph_bg.png');
+}
+
+#_container div ol {
+	font-family: monospace, arial, sans-serif;
+}
+
+#tabSet {
+	top: 102px;
+	position: absolute;
+	width: 100%;
+}
+/*table row*/
+#tabrow {
+	display: table-row;
+	width: 100%;
+	outline: #AFD6F7 solid 1px;
+}
+
+#tabrow:nth-child(even) {
+	background-color: #DCECFA;
+}
+
+#tabrow:nth-child(odd) {
+	background-color: #ffffff;
+}
+/*table cells*/
+#tabrow div {
+	display: table-cell;
+	font-size: 11px;
+	vertical-align: middle;
+	background-color: inherit;
+	padding: 1px 2px 1px 2px;
+}
+
+#metadata {
+	top: 112px;
+	position: absolute;
+	width: 100%;
+	float: right;
+	text-align: right;
+	padding-right: 20px;
+	font-size: 12px;
+	color: #3299FA;
+}
+
+._cell_nodename {
+	min-width: 80px;
+	max-width: 80px;
+	overflow: hidden;
+	padding: 0 5px 0 5px;
+}
+
+._cell_nodename_full {
+	min-width: 190px;
+	max-width: 190px;
+	padding: 0 5px 0 5px;
+}
+
+._cell_logfilename {
+	min-width: 150px;
+	max-width: 150px;
+	overflow: hidden;
+	padding: 0 5px 0 5px;
+}
+
+._cell_date {
+	min-width: 120px;
+	max-width: 120px;
+	font-weight: bold;
+	overflow: hidden;
+	padding: 0 10px 0 10px;
+}
+
+._cell_text {
+	/*chrome compatbility*/
+	width:100%;
+	min-width: 100%;
+}
+
+._highlight {
+	background-color: #F3F700;
+	padding: 0 0 0 0;
+	margin: 0 0 0 0;
+}
+
+#loading-img {
+	background: url(../img/loading.gif) center center no-repeat;
+	position: absolute;
+	height: 150px;
+	width: 450px;
+	left: 50%;
+	margin-left: -225px;
+	top: 160px;
+}
+
+.overlay {
+	z-index: 100;
+	background: gray;
+	opacity: 0.5;
+	display: block;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+/* START Section for line results from file, used in line_view.jsp view*/
+#fileMetaData div {
+	display: table-row;
+	width: 100%
+}
+
+#fileMetaData div div {
+	display: table-cell;
+	width: 350px;
+	overflow: hidden;
+}
+#fileMetaData div div span{
+	font-size: 12px;
+}
+#fileMetaData div div span:nth-child(1) {
+	font-weight: bold;
+}
+
+#fileMetaData div div span:nth-child(2) {
+	padding-left: 10px;
+}
+
+#fileTabRow {
+	display: table-row;
+	outline: #AFD6F7 solid 1px;
+	width: 100%;
+	position: relative;
+}
+
+#fileTabRow:nth-child(1) {
+	background-color: #dedcdc;
+	font-weight: bold;
+	position: relative fixed;
+}
+
+#fileTabRow:nth-child(even) {
+	background-color: #DCECFA;
+}
+
+#fileTabRow:nth-child(2n+3) {
+	background-color: #ffffff;
+}
+
+#fileTabRow div {
+	font-size: 10px;
+	display: table-cell;
+	vertical-align: middle;
+	background-color: inherit;
+	padding: 1px 2px 1px 2px;
+}
+
+#fileTabRow div:nth-child(1) {
+	width: 15px;
+	font-weight: bold;
+}
+
+#fileTabRow div:nth-child(2) {
+	min-width: 120px;
+	max-width: 120px;
+	font-weight: bold;
+	overflow: hidden;
+	padding: 0 5px 0 5px;
+}
+
+#fileTabRow div:nth-child(3) {
+	width: 100%;
+}
+
+.ngdialog.ngdialog-theme-default.line-dialog .ngdialog-content {
+	width: 65%;
+}
+
+#loading-lines-img {
+	background: url(../img/loading_spin.gif) center center no-repeat;
+	width: 100%;
+	height: 320px;
+	position: relative;
+	margin-top: -400px;
+}
+
+#loading-lines-error {
+	font-size: 14px;
+	color: red;
+	position: relative;
+	top:-100px;
+}
+/* END Section for line results from file, used in line_view.jsp view*/
