@@ -5,6 +5,7 @@
  */
 package com.log.server.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -17,8 +18,12 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
  *
  * @author Vaibhav Singh
  */
-public class Group {
+public class Group implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7347433896020080606L;
 	@NotEmpty
 	private String name;
 	@NotEmpty

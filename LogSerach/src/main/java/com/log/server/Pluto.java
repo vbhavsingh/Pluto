@@ -10,6 +10,7 @@ import javax.annotation.PreDestroy;
 import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,16 +32,13 @@ import com.log.server.util.Utilities;
 		"com.security.common"
 })
 @ImportResource({
-	"classpath*:database-spring.xml",
 	"classpath*:spring-security.xml"
 })
 public class Pluto extends SpringBootServletInitializer {
     
 	private final static Logger Log = LoggerFactory.getLogger(Pluto.class);
 	
-	
-	@Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(Pluto.class);
     }
     

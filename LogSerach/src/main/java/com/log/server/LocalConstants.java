@@ -153,12 +153,13 @@ public class LocalConstants {
 	}
 
 	public static enum DATABASES {
-		oracle("org.hibernate.dialect.OracleDialect", "oracle.jdbc.driver.OracleDriver"),
-		mysql("org.hibernate.dialect.MySQLDialect", "com.mysql.jdbc.Driver"),
-		mssql("org.hibernate.dialect.SQLServerDialect", "com.microsoft.sqlserver.jdbc.SQLServerDriver"),
-		postgres("org.hibernate.dialect.PostgreSQLDialect", "org.postgresql.Driver"),
-		mariadb("org.hibernate.dialect.MariaDBDialect", "org.mariadb.jdbc.Driver"),
-		hsql("org.hibernate.dialect.HSQLDialect", "org.hsqldb.jdbcDriver");
+		oracle("org.hibernate.dialect.OracleDialect", "oracle.jdbc.driver.OracleDriver", "schema-oracle.sql"),
+		mysql("org.hibernate.dialect.MySQLDialect", "com.mysql.jdbc.Driver", "schema-mysql.sql"),
+		mssql("org.hibernate.dialect.SQLServerDialect", "com.microsoft.sqlserver.jdbc.SQLServerDriver",
+				"schema-sqlserver.sql"),
+		postgres("org.hibernate.dialect.PostgreSQLDialect", "org.postgresql.Driver", "schema-postgresql.sql"),
+		mariadb("org.hibernate.dialect.MariaDBDialect", "org.mariadb.jdbc.Driver", "schema-mysql.sql"),
+		hsql("org.hibernate.dialect.HSQLDialect", "org.hsqldb.jdbcDriver", "schema-hsqldb.sql");
 
 		private static final Map<String, DATABASES> MAP = new HashMap<>();
 
@@ -168,13 +169,15 @@ public class LocalConstants {
 			}
 		}
 
-		DATABASES(String hibernateDialect, String driverClass) {
+		DATABASES(String hibernateDialect, String driverClass, String sessionSchema) {
 			this.hibernateDialect = hibernateDialect;
 			this.driverClass = driverClass;
+			this.sessionSchema = sessionSchema;
 		}
 
 		public final String hibernateDialect;
 		public final String driverClass;
+		public final String sessionSchema;
 
 		public static String getDialect() {
 			String dbName = Utilities.getProperty(PROPERTIES.DB_TYPE);
@@ -192,6 +195,16 @@ public class LocalConstants {
 			DATABASES db = MAP.get(dbName);
 			if (db != null) {
 				return db.driverClass;
+			}
+			return null;
+		}
+
+		public static String getSessionSchema() {
+			String dbName = Utilities.getProperty(PROPERTIES.DB_TYPE);
+			dbName = dbName == null ? hsql.name() : dbName;
+			DATABASES db = MAP.get(dbName);
+			if (db != null) {
+				return "org/springframework/session/jdbc/" + db.sessionSchema;
 			}
 			return null;
 		}

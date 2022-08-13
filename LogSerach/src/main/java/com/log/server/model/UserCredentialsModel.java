@@ -5,6 +5,7 @@
  */
 package com.log.server.model;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -18,8 +19,12 @@ import javax.validation.constraints.Size;
  *
  * @author Vaibhav Singh
  */
-public class UserCredentialsModel {
+public class UserCredentialsModel implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5786691136128747434L;
 	@NotEmpty(message = "Mandatory Field")
 	@Size(min = 5, max = 8, message = "User Name must be 5 to 6 charcters.")
 	private String username;
